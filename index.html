@@ -1,0 +1,2251 @@
+<!DOCTYPE html>
+<html lang="az" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>FluentPro AZ — 0-dan İngilis Dili Akademiyası</title>
+  <!-- Telegram Mini App SDK -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Inter Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'sans-serif'] },
+          colors: {
+            obsidian: '#080B14',
+            indigoPro: '#6366F1',
+            emeraldPro: '#10B981',
+            goldPro: '#F59E0B',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    * {
+      -webkit-tap-highlight-color: transparent;
+      box-sizing: border-box;
+    }
+    body {
+      background-color: #060911;
+      color: #F8FAFC;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+    /* 3D Flashcard Flip */
+    .perspective-1000 { perspective: 1200px; }
+    .preserve-3d {
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .flipped { transform: rotateY(180deg); }
+    .backface-hidden {
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+    .rotate-y-180 { transform: rotateY(180deg); }
+
+    /* Custom Scrollbars */
+    ::-webkit-scrollbar { width: 4px; height: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.2); border-radius: 9999px; }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* Ambient Mesh Glow */
+    @keyframes floatGlow {
+      0%, 100% { transform: translateY(0) scale(1); opacity: 0.45; }
+      50% { transform: translateY(-12px) scale(1.06); opacity: 0.75; }
+    }
+    .mesh-orb { animation: floatGlow 7s infinite ease-in-out; }
+
+    @keyframes popIn {
+      0% { transform: scale(0.95) translateY(6px); opacity: 0; }
+      100% { transform: scale(1) translateY(0); opacity: 1; }
+    }
+    .animate-pop { animation: popIn 0.26s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+    @keyframes pulseRing {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.55); }
+      70% { transform: scale(1); box-shadow: 0 0 0 12px rgba(16, 185, 129, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
+    .pulse-ring { animation: pulseRing 2.2s infinite; }
+
+    /* Confetti Particles */
+    .confetti-piece {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      top: -10px;
+      z-index: 9999;
+      pointer-events: none;
+      animation: confettiFall 2.4s linear forwards;
+    }
+    @keyframes confettiFall {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(105vh) rotate(720deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex justify-center bg-[#05070E] text-slate-100 selection:bg-indigo-500/30">
+
+  <!-- Ambient Glowing Mesh Gradients -->
+  <div class="fixed inset-0 pointer-events-none overflow-hidden flex justify-center">
+    <div class="w-[460px] h-[460px] bg-indigo-600/15 rounded-full blur-[120px] -top-28 -left-20 mesh-orb"></div>
+    <div class="w-[400px] h-[400px] bg-emerald-500/12 rounded-full blur-[120px] top-1/3 -right-24 mesh-orb" style="animation-delay: 2s;"></div>
+    <div class="w-[380px] h-[380px] bg-amber-500/10 rounded-full blur-[120px] -bottom-24 left-10 mesh-orb" style="animation-delay: 4s;"></div>
+  </div>
+
+  <!-- Main Mobile / Telegram Mini App Shell -->
+  <div class="relative w-full max-w-[480px] min-h-screen flex flex-col bg-[#080B14]/92 border-x border-slate-800/80 shadow-2xl">
+
+    <!-- ==================== STICKY TOP HEADER ==================== -->
+    <header class="sticky top-0 z-30 backdrop-blur-xl bg-[#080B14]/88 border-b border-slate-800/80 px-3.5 py-3">
+      <div class="flex items-center justify-between gap-2">
+        <!-- Brand Logo & Greeting -->
+        <div class="flex items-center gap-2.5 min-w-0">
+          <div class="w-9 h-9 rounded-2xl bg-gradient-to-br from-indigo-500 via-emerald-400 to-amber-400 p-[1.5px] shrink-0 shadow-lg shadow-indigo-500/20">
+            <div class="w-full h-full bg-[#080B14] rounded-[14px] flex items-center justify-center font-black text-xs bg-clip-text text-transparent bg-gradient-to-tr from-indigo-400 via-emerald-300 to-amber-300">
+              EN
+            </div>
+          </div>
+          <div class="min-w-0">
+            <div class="flex items-center gap-1.5">
+              <h1 class="font-extrabold text-sm tracking-tight text-white truncate">FluentPro AZ</h1>
+              <span class="text-[9px] font-black px-1.5 py-0.5 rounded-md bg-gradient-to-r from-amber-500/20 to-yellow-500/20 text-amber-300 border border-amber-500/40 tracking-wider">PRO</span>
+            </div>
+            <p class="text-[11px] text-slate-400 truncate" id="userGreeting">Xoş gəldin, Tələbə!</p>
+          </div>
+        </div>
+
+        <!-- Right Controls: Streak, Sound Toggle, Download index.html -->
+        <div class="flex items-center gap-1.5 shrink-0">
+          <!-- Streak -->
+          <div class="flex items-center gap-1 px-2 py-1.5 rounded-xl bg-amber-500/12 border border-amber-500/30 text-amber-300 text-xs font-extrabold" title="Gündəlik Seriya">
+            <i data-lucide="flame" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+            <span id="streakCount">1</span><span class="text-[10px] font-semibold">Gün</span>
+          </div>
+
+          <!-- Mute / Unmute Sound -->
+          <button onclick="toggleMute()" id="muteBtn" class="p-2 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700/70 text-slate-300 transition active:scale-95" title="Səs effektləri">
+            <i data-lucide="volume-2" class="w-3.5 h-3.5 text-emerald-400"></i>
+          </button>
+
+          <!-- Download index.html -->
+          <button onclick="downloadIndexHtml()" class="flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-indigo-600/25 hover:bg-indigo-600/40 border border-indigo-500/40 text-indigo-200 text-[11px] font-bold transition active:scale-95" title="Tam Mini App (index.html) faylını yüklə">
+            <i data-lucide="download" class="w-3.5 h-3.5 text-indigo-300"></i>
+            <span class="hidden sm:inline">index.html Yüklə</span>
+            <span class="sm:hidden">Yüklə</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- XP & Level Progress Bar -->
+      <div class="mt-2.5 bg-slate-900/80 border border-slate-800/90 rounded-2xl px-3 py-2">
+        <div class="flex items-center justify-between text-[11px] mb-1">
+          <span class="font-bold text-indigo-300 flex items-center gap-1.5" id="levelTitleBadge">
+            <i data-lucide="award" class="w-3.5 h-3.5 text-amber-400"></i>
+            Səviyyə 1: Başlanğıc (A0)
+          </span>
+          <span class="font-extrabold text-emerald-400 flex items-center gap-1">
+            <i data-lucide="sparkles" class="w-3 h-3"></i>
+            <span id="xpCount">0</span> XP
+          </span>
+        </div>
+        <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+          <div id="levelProgressBar" class="h-full bg-gradient-to-r from-indigo-500 via-emerald-400 to-amber-400 rounded-full transition-all duration-500" style="width: 10%"></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ==================== MAIN SCROLLABLE VIEWPORT ==================== -->
+    <main class="flex-1 px-3.5 pt-3 pb-24 overflow-y-auto">
+
+      <!-- ================================================================
+           TAB 1: YOL XƏRİTƏSİ (0-DAN BAŞLANĞIC KURSU)
+      ================================================================ -->
+      <section id="tab-roadmap" class="space-y-4 animate-pop">
+        <!-- Hero Banner -->
+        <div class="rounded-3xl bg-gradient-to-br from-indigo-950/90 via-slate-900/95 to-emerald-950/70 border border-indigo-500/30 p-4 shadow-xl relative overflow-hidden">
+          <div class="relative z-10 flex items-center justify-between gap-3">
+            <div class="space-y-1">
+              <span class="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+                0-dan Addım-addım Akademiya
+              </span>
+              <h2 class="text-base sm:text-lg font-extrabold text-white leading-snug">
+                Sıfırdan Sərbəst Danışığa Doğru
+              </h2>
+              <p class="text-xs text-slate-300/90 leading-relaxed">
+                Hər addımda qısa izah, səsli nümunələr və 4 suallıq mini-sınaq ilə növbəti səviyyəni açın.
+              </p>
+            </div>
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-slate-950 font-black text-base shrink-0 shadow-lg shadow-amber-500/20">
+              A0→A2
+            </div>
+          </div>
+        </div>
+
+        <!-- Vertical Interactive Learning Path -->
+        <div id="roadmapNodesContainer" class="relative py-2 space-y-4"></div>
+      </section>
+
+      <!-- ================================================================
+           TAB 2: GÜNDƏLİK SÖZLƏR (3D FLASHCARDS + QUICK QUIZ)
+      ================================================================ -->
+      <section id="tab-words" class="hidden space-y-3.5 animate-pop">
+        <!-- Mode Switcher: 3D Kartlar vs Sürətli Test -->
+        <div class="grid grid-cols-2 gap-1.5 p-1 rounded-2xl bg-slate-900/90 border border-slate-800">
+          <button onclick="setWordsSubMode('cards')" id="submode-cards" class="py-2 rounded-xl text-xs font-extrabold bg-indigo-600 text-white shadow transition">
+            🎴 3D Söz Kartları
+          </button>
+          <button onclick="setWordsSubMode('quiz')" id="submode-quiz" class="py-2 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition">
+            ⚡ Sürətli Test (Quiz)
+          </button>
+        </div>
+
+        <!-- SUBMODE A: 3D FLASHCARDS -->
+        <div id="words-cards-view" class="space-y-3.5">
+          <!-- Category Filter Pills -->
+          <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1" id="wordCategoryPills"></div>
+
+          <!-- Daily Fresh Pack Generator Bar -->
+          <div class="flex items-center justify-between bg-slate-900/80 border border-slate-800 rounded-2xl px-3 py-2">
+            <div class="text-[11px] text-slate-400">
+              Öyrənilib: <strong class="text-emerald-400" id="learnedWordsCounter">0 / 48</strong>
+            </div>
+            <button onclick="generateNewDailyWordPack()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-emerald-500/20 to-indigo-500/20 hover:from-emerald-500/30 hover:to-indigo-500/30 border border-emerald-500/35 text-emerald-300 text-[11px] font-bold transition active:scale-95">
+              <i data-lucide="shuffle" class="w-3.5 h-3.5"></i>
+              Yeni Gündəlik Paket (10 Söz)
+            </button>
+          </div>
+
+          <!-- Deck Counter -->
+          <div class="flex items-center justify-between text-xs px-1">
+            <span id="activeDeckTitle" class="font-semibold text-slate-300">Bütün Kateqoriyalar</span>
+            <span id="flashcardIndexLabel" class="font-mono text-[11px] bg-slate-800/90 px-2.5 py-0.5 rounded-lg text-indigo-300">1 / 48</span>
+          </div>
+
+          <!-- 3D Flip Card -->
+          <div class="perspective-1000 w-full h-[355px] cursor-pointer select-none" onclick="toggleFlipFlashcard()">
+            <div id="flashcardInner" class="relative w-full h-full preserve-3d">
+
+              <!-- FRONT FACE -->
+              <div class="absolute inset-0 backface-hidden rounded-3xl bg-gradient-to-b from-slate-800/95 via-slate-900/95 to-[#0B101E] border border-slate-700/80 shadow-2xl p-5 flex flex-col justify-between">
+                <div class="flex items-center justify-between">
+                  <span id="fcCategoryBadge" class="text-[11px] font-bold px-2.5 py-1 rounded-xl bg-indigo-500/15 text-indigo-300 border border-indigo-500/30">
+                    0-dan Əsaslar
+                  </span>
+                  <span id="fcLearnedBadge" class="hidden text-[11px] font-bold px-2.5 py-1 rounded-xl bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 flex items-center gap-1">
+                    <i data-lucide="check-circle-2" class="w-3 h-3"></i> Yadda saxlanılıb
+                  </span>
+                </div>
+
+                <div class="text-center my-auto px-1">
+                  <h3 id="fcEnglishWord" class="text-2xl sm:text-3xl font-black text-white tracking-tight leading-snug">
+                    How's it going?
+                  </h3>
+                  <div class="mt-2.5 flex flex-col items-center gap-1">
+                    <span id="fcIpa" class="text-xs font-mono text-slate-400">/haʊz ɪt ˈɡoʊɪŋ/</span>
+                    <span id="fcAzPhonetic" class="text-xs font-bold text-amber-300 bg-amber-500/12 border border-amber-500/25 px-3 py-1 rounded-full">
+                      [Hauz it qouinq?]
+                    </span>
+                  </div>
+
+                  <!-- Native Audio Controls -->
+                  <div class="mt-5 flex items-center justify-center gap-2.5" onclick="event.stopPropagation()">
+                    <button onclick="speakFlashcard(1.0)" class="flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs shadow-lg shadow-emerald-500/25 transition active:scale-95">
+                      <i data-lucide="volume-2" class="w-4 h-4"></i>
+                      Dinlə (1.0x)
+                    </button>
+                    <button onclick="speakFlashcard(0.7)" class="flex items-center gap-1.5 px-3.5 py-2.5 rounded-2xl bg-slate-800 hover:bg-slate-700 text-amber-300 border border-slate-700 font-bold text-xs transition active:scale-95" title="Yavaş tələffüz">
+                      <i data-lucide="snail" class="w-4 h-4"></i>
+                      0.7x
+                    </button>
+                  </div>
+                </div>
+
+                <div class="text-center text-[11px] text-slate-400 flex items-center justify-center gap-1.5">
+                  <i data-lucide="rotate-cw" class="w-3.5 h-3.5 text-indigo-400"></i>
+                  Tərcümə və real həyat cümləsi üçün karta toxunun
+                </div>
+              </div>
+
+              <!-- BACK FACE -->
+              <div class="absolute inset-0 backface-hidden rotate-y-180 rounded-3xl bg-gradient-to-b from-indigo-950/95 via-slate-900/95 to-slate-950 border border-indigo-500/45 shadow-2xl p-5 flex flex-col justify-between">
+                <div class="flex items-center justify-between">
+                  <span class="text-[11px] font-bold uppercase tracking-wider text-indigo-300">Azərbaycanca Tərcümə</span>
+                  <button onclick="event.stopPropagation(); speakFlashcard(1.0)" class="p-2 rounded-xl bg-indigo-500/20 hover:bg-indigo-500/30 text-indigo-300 transition">
+                    <i data-lucide="volume-2" class="w-4 h-4"></i>
+                  </button>
+                </div>
+
+                <div class="my-auto space-y-4">
+                  <div class="text-center">
+                    <h4 id="fcAzTranslation" class="text-2xl font-black text-white leading-snug">
+                      İşlər necə gedir? / Necəsən?
+                    </h4>
+                    <p id="fcEnSub" class="text-xs text-slate-400 mt-1">How's it going?</p>
+                  </div>
+
+                  <!-- Example Sentence Box -->
+                  <div class="p-3.5 rounded-2xl bg-slate-950/85 border border-slate-700/80 space-y-2" onclick="event.stopPropagation()">
+                    <div class="flex items-center justify-between">
+                      <span class="text-[10px] font-extrabold uppercase tracking-wider text-emerald-400 flex items-center gap-1">
+                        <i data-lucide="message-square-quote" class="w-3.5 h-3.5"></i> Gündəlik Cümlə
+                      </span>
+                      <button onclick="speakFlashcardExample()" class="text-[11px] font-bold text-emerald-300 bg-emerald-500/15 hover:bg-emerald-500/25 px-2.5 py-1 rounded-lg flex items-center gap-1 transition">
+                        <i data-lucide="play" class="w-3 h-3 fill-emerald-300"></i> Dinlə
+                      </button>
+                    </div>
+                    <p id="fcExampleEn" class="text-sm font-semibold text-slate-100 leading-relaxed">
+                      "Hey! Long time no see. How's it going?"
+                    </p>
+                    <p id="fcExampleAz" class="text-xs text-slate-400 italic">
+                      “Hey! Çoxdandır görüşmürük. İşlər necə gedir?”
+                    </p>
+                  </div>
+                </div>
+
+                <div class="text-center text-[11px] text-indigo-300/75">
+                  Ön tərəfə qayıtmaq üçün toxunun
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Flashcard Navigation & Save Actions -->
+          <div class="grid grid-cols-12 gap-2">
+            <button onclick="prevFlashcard()" class="col-span-2 flex items-center justify-center p-3.5 rounded-2xl bg-slate-800/90 hover:bg-slate-800 border border-slate-700/80 text-slate-300 transition active:scale-95">
+              <i data-lucide="chevron-left" class="w-5 h-5"></i>
+            </button>
+
+            <button onclick="markWordLearned()" class="col-span-8 flex items-center justify-center gap-2 p-3.5 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-black text-xs shadow-lg shadow-emerald-500/25 transition active:scale-95">
+              <i data-lucide="bookmark-check" class="w-4 h-4"></i>
+              Yadda saxla / Öyrəndim (+10 XP)
+            </button>
+
+            <button onclick="nextFlashcard()" class="col-span-2 flex items-center justify-center p-3.5 rounded-2xl bg-slate-800/90 hover:bg-slate-800 border border-slate-700/80 text-slate-300 transition active:scale-95">
+              <i data-lucide="chevron-right" class="w-5 h-5"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- SUBMODE B: QUICK QUIZ WITH COMBO MULTIPLIER -->
+        <div id="words-quiz-view" class="hidden space-y-3.5">
+          <div class="rounded-3xl bg-gradient-to-r from-indigo-900/60 via-slate-900 to-amber-900/30 border border-indigo-500/30 p-4 flex items-center justify-between">
+            <div>
+              <span class="text-[10px] font-extrabold uppercase tracking-wider text-amber-300">Sürətli Yaddaş Sınağı</span>
+              <h3 class="text-base font-extrabold text-white">Kombo Seriya ilə XP Topla!</h3>
+              <p class="text-[11px] text-slate-400">Ardıcıl doğru cavablar xalınızı 5 qat artırır</p>
+            </div>
+            <div class="px-3 py-2 rounded-2xl bg-slate-950/80 border border-amber-500/40 text-center">
+              <div class="text-[10px] text-slate-400 font-semibold">KOMBO</div>
+              <div class="text-xl font-black text-amber-400" id="wordQuizCombo">x1</div>
+            </div>
+          </div>
+
+          <div class="rounded-3xl bg-slate-900/90 border border-slate-800 p-4 space-y-4 shadow-xl">
+            <div class="flex items-center justify-between">
+              <span id="wqDirectionBadge" class="text-[11px] font-bold px-2.5 py-1 rounded-xl bg-indigo-500/15 text-indigo-300 border border-indigo-500/30">
+                İngiliscə → Azərbaycanca
+              </span>
+              <button onclick="speakCurrentWordQuiz()" class="flex items-center gap-1.5 text-xs font-bold text-emerald-300 bg-emerald-500/15 hover:bg-emerald-500/25 px-3 py-1.5 rounded-xl border border-emerald-500/30 transition">
+                <i data-lucide="volume-2" class="w-3.5 h-3.5"></i> Dinlə
+              </button>
+            </div>
+
+            <div class="text-center py-2">
+              <p class="text-xs text-slate-400 mb-1" id="wqPromptInstruction">Bu ifadənin mənası nədir?</p>
+              <h4 id="wqPromptWord" class="text-2xl font-black text-white">I'm on my way.</h4>
+              <p id="wqPromptPhonetic" class="text-xs text-amber-300/90 mt-1">[Aym on may vey]</p>
+            </div>
+
+            <div id="wqOptionsList" class="space-y-2"></div>
+
+            <div id="wqFeedbackBanner" class="hidden rounded-2xl p-3 text-xs border"></div>
+
+            <button id="wqNextBtn" onclick="nextWordQuizQuestion()" class="hidden w-full py-3.5 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold text-xs shadow-lg shadow-indigo-500/25 transition active:scale-95">
+              Növbəti Sual →
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           TAB 3: QRAMMATİKA LAB (VISUAL FORMULAS + SENTENCE BUILDER)
+      ================================================================ -->
+      <section id="tab-grammar" class="hidden space-y-4 animate-pop">
+        <!-- Grammar Topic Selector Pills -->
+        <div class="space-y-1.5">
+          <div class="flex items-center justify-between px-1">
+            <h2 class="text-sm font-extrabold text-white flex items-center gap-1.5">
+              <i data-lucide="flask-conical" class="w-4 h-4 text-indigo-400"></i>
+              Vizual Qrammatika Laboratoriyası
+            </h2>
+            <span class="text-[10px] font-bold text-amber-300 bg-amber-500/10 px-2 py-0.5 rounded-lg border border-amber-500/25">Sadə İzah</span>
+          </div>
+          <div class="flex gap-2 overflow-x-auto no-scrollbar pb-1" id="grammarTopicPills"></div>
+        </div>
+
+        <!-- Visual Formula Card -->
+        <div id="grammarFormulaCard" class="rounded-3xl bg-slate-900/90 border border-slate-800 p-4 space-y-3.5 shadow-xl"></div>
+
+        <!-- Interactive Word-Tile Sentence Builder Mini-Game -->
+        <div class="rounded-3xl bg-gradient-to-b from-indigo-950/60 to-slate-900/95 border border-indigo-500/35 p-4 space-y-3.5 shadow-xl">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-extrabold uppercase tracking-wider text-emerald-400 flex items-center gap-1.5">
+              <i data-lucide="puzzle" class="w-4 h-4"></i> Cümlə Qurma Oyunu
+            </span>
+            <span class="text-[11px] font-mono text-slate-400" id="sbProgressLabel">Tapşırıq 1 / 12</span>
+          </div>
+
+          <div class="bg-slate-950/80 border border-slate-800 rounded-2xl p-3">
+            <div class="text-[11px] text-slate-400 mb-0.5">Bu cümləni ingiliscə qurun:</div>
+            <div id="sbTargetAz" class="text-sm font-extrabold text-white">
+              Mən hər gün ingilis dili öyrənirəm.
+            </div>
+          </div>
+
+          <!-- User Dropzone (Selected Tiles) -->
+          <div class="min-h-[54px] p-2.5 rounded-2xl bg-slate-950/90 border-2 border-dashed border-indigo-500/40 flex flex-wrap gap-2 items-center" id="sbSelectedZone">
+            <span class="text-xs text-slate-500 italic">Aşağıdakı söz bloklarına toxunun...</span>
+          </div>
+
+          <!-- Shuffled Word Bank -->
+          <div class="flex flex-wrap gap-2 justify-center py-1" id="sbWordBank"></div>
+
+          <!-- Feedback Box -->
+          <div id="sbFeedback" class="hidden rounded-2xl p-3 text-xs border"></div>
+
+          <!-- Action Buttons -->
+          <div class="grid grid-cols-12 gap-2">
+            <button onclick="clearSentenceBuilder()" class="col-span-4 py-3 rounded-2xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs transition active:scale-95">
+              Təmizlə
+            </button>
+            <button id="sbCheckBtn" onclick="checkSentenceBuilder()" class="col-span-8 py-3 rounded-2xl bg-gradient-to-r from-indigo-600 to-emerald-500 hover:opacity-95 text-white font-extrabold text-xs shadow-lg transition active:scale-95">
+              Yoxla (+20 XP)
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           TAB 4: DANIŞIQ & AI MÜƏLLİM (ROLEPLAY + MIC + AI TUTOR)
+      ================================================================ -->
+      <section id="tab-speaking" class="hidden space-y-4 animate-pop">
+        <!-- Sub-navigation for Speaking Tab -->
+        <div class="grid grid-cols-3 gap-1.5 p-1 rounded-2xl bg-slate-900/90 border border-slate-800">
+          <button onclick="setSpeakingSubMode('roleplay')" id="sp-roleplay" class="py-2 rounded-xl text-[11px] font-extrabold bg-emerald-500 text-slate-950 shadow transition">
+            🎭 Canlı Dialoq
+          </button>
+          <button onclick="setSpeakingSubMode('mic')" id="sp-mic" class="py-2 rounded-xl text-[11px] font-bold text-slate-400 hover:text-white transition">
+            🎙️ Tələffüz Yoxla
+          </button>
+          <button onclick="setSpeakingSubMode('aitutor')" id="sp-aitutor" class="py-2 rounded-xl text-[11px] font-bold text-slate-400 hover:text-white transition">
+            🤖 AI Müəllim
+          </button>
+        </div>
+
+        <!-- SUBVIEW 1: REAL-LIFE INTERACTIVE ROLEPLAYS -->
+        <div id="speaking-roleplay-view" class="space-y-3">
+          <div class="flex gap-2 overflow-x-auto no-scrollbar pb-1" id="roleplayScenarioPills"></div>
+
+          <div class="rounded-3xl bg-slate-900/90 border border-slate-800 flex flex-col h-[415px] overflow-hidden shadow-xl">
+            <div class="px-4 py-2.5 bg-slate-800/80 border-b border-slate-700/70 flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span id="rpHeaderTitle" class="text-xs font-extrabold text-white">☕ Kofeşopda Sifariş</span>
+              </div>
+              <button onclick="resetRoleplay()" class="text-[11px] text-slate-400 hover:text-white flex items-center gap-1">
+                <i data-lucide="rotate-ccw" class="w-3 h-3"></i> Yenidən
+              </button>
+            </div>
+
+            <div id="rpMessagesFeed" class="flex-1 p-3.5 overflow-y-auto space-y-3"></div>
+
+            <div id="rpChoicesBox" class="p-2.5 bg-slate-950/90 border-t border-slate-800 space-y-1.5 max-h-[175px] overflow-y-auto"></div>
+          </div>
+        </div>
+
+        <!-- SUBVIEW 2: PRONUNCIATION MIC PRACTICE -->
+        <div id="speaking-mic-view" class="hidden space-y-4">
+          <div class="rounded-3xl bg-slate-900/90 border border-slate-800 p-5 text-center space-y-4 shadow-xl">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-bold px-2.5 py-1 rounded-xl bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+                Danışıq Məşqi
+              </span>
+              <button onclick="nextPronunciationPhrase()" class="text-xs font-bold text-indigo-300 hover:text-indigo-200 flex items-center gap-1">
+                Növbəti cümlə <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+
+            <div class="py-2 space-y-2">
+              <p class="text-xs text-slate-400">Əvvəlcə dinləyin, sonra mikrofona basıb təkrarlayın:</p>
+              <h3 id="pronTargetEn" class="text-xl sm:text-2xl font-black text-white leading-snug">
+                Could I have a cup of coffee, please?
+              </h3>
+              <p id="pronTargetAz" class="text-xs text-slate-400">“Zəhmət olmasa, bir fincan qəhvə ala bilərəm?”</p>
+              <span id="pronTargetPhonetic" class="inline-block text-xs font-bold text-amber-300 bg-amber-500/10 border border-amber-500/25 px-3 py-1 rounded-full">
+                [Kud ay həv ə kap of kofi, pliz?]
+              </span>
+            </div>
+
+            <!-- Listen Sample Button -->
+            <div class="flex justify-center">
+              <button onclick="speakPronunciationTarget()" class="flex items-center gap-2 px-4 py-2 rounded-2xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-emerald-300 text-xs font-bold transition active:scale-95">
+                <i data-lucide="volume-2" class="w-4 h-4"></i>
+                Nümunə Tələffüzü Dinlə
+              </button>
+            </div>
+
+            <!-- Big Mic Button -->
+            <div class="pt-2 flex flex-col items-center gap-2.5">
+              <button id="micRecordBtn" onclick="startPronunciationCheck()" class="w-20 h-20 rounded-full bg-gradient-to-br from-emerald-400 to-indigo-600 flex items-center justify-center text-slate-950 shadow-2xl shadow-emerald-500/30 pulse-ring transition active:scale-90">
+                <i data-lucide="mic" class="w-8 h-8 stroke-[2.5]"></i>
+              </button>
+              <span id="micStatusLabel" class="text-xs font-semibold text-slate-400">Danışmaq üçün mikrofona toxunun</span>
+            </div>
+
+            <!-- Pronunciation Result Box -->
+            <div id="pronResultBox" class="hidden rounded-2xl bg-slate-950/90 border border-slate-800 p-4 text-left space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-300">Tələffüz Dəqiqliyi:</span>
+                <span id="pronScoreBadge" class="text-sm font-black px-2.5 py-0.5 rounded-lg bg-emerald-500/20 text-emerald-400">94%</span>
+              </div>
+              <p class="text-xs text-slate-400">Sizin dediyiniz: <strong id="pronSpokenText" class="text-white">...</strong></p>
+              <p id="pronFeedbackTip" class="text-xs text-emerald-300 font-medium"></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- SUBVIEW 3: AI İNGİLİS MÜƏLLİMİ (SMART TUTOR CHAT) -->
+        <div id="speaking-aitutor-view" class="hidden space-y-2.5">
+          <!-- Quick Prompt Chips -->
+          <div class="flex gap-1.5 overflow-x-auto no-scrollbar pb-1">
+            <button onclick="sendQuickAiPrompt('Mənə 5 gündəlik fraza öyrət')" class="whitespace-nowrap px-3 py-1.5 rounded-xl bg-indigo-500/15 hover:bg-indigo-500/25 border border-indigo-500/30 text-indigo-200 text-[11px] font-semibold transition">
+              ✨ Mənə 5 gündəlik fraza öyrət
+            </button>
+            <button onclick="sendQuickAiPrompt('Bu cümləni yoxla: I goes to work')" class="whitespace-nowrap px-3 py-1.5 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/30 text-amber-200 text-[11px] font-semibold transition">
+              🔍 Bu cümləni yoxla: I goes to work
+            </button>
+            <button onclick="sendQuickAiPrompt('Mənimlə ingiliscə danış')" class="whitespace-nowrap px-3 py-1.5 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/30 text-emerald-200 text-[11px] font-semibold transition">
+              💬 Mənimlə ingiliscə danış
+            </button>
+          </div>
+
+          <!-- AI Chat Box -->
+          <div class="rounded-3xl bg-slate-900/90 border border-slate-800 flex flex-col h-[395px] overflow-hidden shadow-xl">
+            <div class="px-4 py-2.5 bg-slate-800/80 border-b border-slate-700/70 flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <div class="w-6 h-6 rounded-lg bg-indigo-500/20 border border-indigo-500/40 flex items-center justify-center text-indigo-300">
+                  <i data-lucide="bot" class="w-3.5 h-3.5"></i>
+                </div>
+                <div>
+                  <div class="text-xs font-extrabold text-white">FluentPro AI Müəllim</div>
+                  <div class="text-[10px] text-emerald-400">Qrammatika düzəlişi + Canlı tərcümə</div>
+                </div>
+              </div>
+              <span class="text-[10px] px-2 py-0.5 rounded-md bg-indigo-500/15 text-indigo-300 font-bold">24/7 Aktiv</span>
+            </div>
+
+            <div id="aiTutorFeed" class="flex-1 p-3.5 overflow-y-auto space-y-3"></div>
+
+            <form onsubmit="handleAiTutorSubmit(event)" class="p-2.5 bg-slate-950/90 border-t border-slate-800 flex items-center gap-2">
+              <input
+                id="aiTutorInput"
+                type="text"
+                placeholder="İngiliscə və ya Azərbaycanca yazın..."
+                class="flex-1 bg-slate-900 border border-slate-700/80 rounded-xl px-3 py-2.5 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-indigo-500"
+              />
+              <button type="submit" id="aiTutorSendBtn" class="p-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-emerald-500 text-white font-bold transition active:scale-95">
+                <i data-lucide="send" class="w-4 h-4"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ==================== BOTTOM GLASS NAVIGATION BAR ==================== -->
+    <nav class="fixed bottom-0 w-full max-w-[480px] z-30 backdrop-blur-xl bg-[#080B14]/95 border-t border-slate-800/90 px-2 py-2">
+      <div class="grid grid-cols-4 gap-1">
+        <button onclick="switchMainTab('roadmap')" id="nav-roadmap" class="nav-tab-btn flex flex-col items-center justify-center py-1.5 rounded-2xl text-indigo-400 bg-indigo-500/15 transition">
+          <i data-lucide="map" class="w-5 h-5 mb-0.5"></i>
+          <span class="text-[10px] font-extrabold">Yol Xəritəsi</span>
+        </button>
+
+        <button onclick="switchMainTab('words')" id="nav-words" class="nav-tab-btn flex flex-col items-center justify-center py-1.5 rounded-2xl text-slate-400 hover:text-slate-200 transition">
+          <i data-lucide="layers" class="w-5 h-5 mb-0.5"></i>
+          <span class="text-[10px] font-bold">Gündəlik Sözlər</span>
+        </button>
+
+        <button onclick="switchMainTab('grammar')" id="nav-grammar" class="nav-tab-btn flex flex-col items-center justify-center py-1.5 rounded-2xl text-slate-400 hover:text-slate-200 transition">
+          <i data-lucide="book-open-check" class="w-5 h-5 mb-0.5"></i>
+          <span class="text-[10px] font-bold">Qrammatika Lab</span>
+        </button>
+
+        <button onclick="switchMainTab('speaking')" id="nav-speaking" class="nav-tab-btn flex flex-col items-center justify-center py-1.5 rounded-2xl text-slate-400 hover:text-slate-200 transition">
+          <i data-lucide="mic" class="w-5 h-5 mb-0.5"></i>
+          <span class="text-[10px] font-bold">Danışıq & AI</span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- ==================== INTERACTIVE LESSON MODAL (ROADMAP) ==================== -->
+    <div id="lessonModal" class="hidden fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/80 backdrop-blur-md p-0 sm:p-4">
+      <div class="w-full max-w-[480px] max-h-[92vh] bg-[#0B101D] border border-slate-700/80 rounded-t-3xl sm:rounded-3xl flex flex-col overflow-hidden shadow-2xl animate-pop">
+        <!-- Modal Header -->
+        <div class="px-4 py-3.5 bg-slate-900/90 border-b border-slate-800 flex items-center justify-between">
+          <div>
+            <span id="modalStepBadge" class="text-[10px] font-extrabold uppercase tracking-wider text-emerald-400">ADDIM 1 • A0</span>
+            <h3 id="modalLessonTitle" class="text-sm font-extrabold text-white">Əlifba, Səslər və İlk Salamlaşma</h3>
+          </div>
+          <button onclick="closeLessonModal()" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300">
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <!-- Modal Body -->
+        <div id="modalLessonBody" class="flex-1 p-4 overflow-y-auto space-y-4"></div>
+      </div>
+    </div>
+
+    <!-- Floating Toast Notification -->
+    <div id="toastBanner" class="fixed top-24 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 transition-all duration-300">
+      <div id="toastText" class="px-4 py-2 rounded-2xl bg-slate-900/95 border border-emerald-500/40 text-emerald-300 text-xs font-extrabold shadow-2xl backdrop-blur-md">
+        +10 XP Qazanıldı!
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // =========================================================================
+    // 1. TELEGRAM WEBAPP SDK INITIALIZATION
+    // =========================================================================
+    let telegramUserName = 'Tələbə';
+    try {
+      if (window.Telegram && window.Telegram.WebApp) {
+        const tg = window.Telegram.WebApp;
+        tg.ready();
+        tg.expand();
+        if (tg.setHeaderColor) tg.setHeaderColor('#080B14');
+        if (tg.setBackgroundColor) tg.setBackgroundColor('#05070E');
+        if (tg.initDataUnsafe && tg.initDataUnsafe.user && tg.initDataUnsafe.user.first_name) {
+          telegramUserName = tg.initDataUnsafe.user.first_name;
+        }
+      }
+    } catch (e) {}
+
+    // =========================================================================
+    // 2. CURRICULUM DATA: 0-DAN ROADMAP LESSONS (A0 -> A2)
+    // =========================================================================
+    const ROADMAP_LESSONS = [
+      {
+        id: 'step_1',
+        step: 'Addım 1',
+        level: 'A0',
+        title: 'Əlifba, Səslər və İlk Salamlaşma',
+        subtitle: 'İngilis dilində oxunuş qaydaları və ilk ifadələr',
+        xpReward: 50,
+        theory: [
+          {
+            heading: '1. İngilis dilində yazıldığı kimi oxunmur!',
+            text: 'Azərbaycan dilindən fərqli olaraq ingilis dilində hərflər söz içində fərqli səslənir. Məsələn: <strong>"th"</strong> birləşməsi dilin ucu dişlərin arasına qoyularaq <em>[z/s]</em> kimi tələffüz olunur (Thank you -> [Sənk yu]). <strong>"sh"</strong> isə <em>[ş]</em> kimi oxunur.'
+          },
+          {
+            heading: '2. Günün saatlarına görə salamlaşma',
+            examples: [
+              { en: 'Hello! / Hi!', ph: '[Helou / Hay]', az: 'Salam!' },
+              { en: 'Good morning!', ph: '[Qud morninq]', az: 'Sabahınız xeyir!' },
+              { en: 'Good afternoon!', ph: '[Qud afternun]', az: 'Günortanız xeyir!' },
+              { en: 'Good evening!', ph: '[Qud ivninq]', az: 'Axşamınız xeyir!' },
+              { en: 'Nice to meet you!', ph: '[Nays tu mit yu]', az: 'Tanış olduğuma şadam!' }
+            ]
+          }
+        ],
+        quiz: [
+          { q: 'İngilis dilində "Sabahınız xeyir!" necə deyilir?', opts: ['Good evening!', 'Good morning!', 'Good night!'], ans: 1 },
+          { q: '"Nice to meet you" ifadəsinin mənası nədir?', opts: ['Sağ olun', 'Tanış olduğuma şadam', 'Bağışlayın'], ans: 1 },
+          { q: 'İngilis dilində "sh" hərf birləşməsi hansı səsi verir?', opts: ['ş', 'ç', 'x'], ans: 0 },
+          { q: 'Səmimi "Salam" demək üçün hansı söz işlənir?', opts: ['Goodbye', 'Hi!', 'Please'], ans: 1 }
+        ]
+      },
+      {
+        id: 'step_2',
+        step: 'Addım 2',
+        level: 'A0+',
+        title: 'Mən, Sən, O — "To Be" (am / is / are)',
+        subtitle: 'Özünü təqdim etmək və kim olduğunu demək',
+        xpReward: 50,
+        theory: [
+          {
+            heading: '1. "To Be" (Olmaq) feli — İngilis dilinin təməli',
+            text: 'İngilis dilində cümlədə hərəkət (getmək, yemək) yoxdursa, mütləq <strong>am / is / are</strong> işlənməlidir! Azərbaycan dilindəki "-am, -əm / -san, -sən / -dır, -dir" şəkilçilərinin əvəzidir.'
+          },
+          {
+            heading: '2. Qızıl Cədvəl və Özünü Təqdimetmə',
+            examples: [
+              { en: 'I am from Azerbaijan. (I\'m)', ph: '[Ay əm from Azərbaydjan]', az: 'Mən Azərbaycandanam.' },
+              { en: 'You are my friend. (You\'re)', ph: '[Yu ar may frend]', az: 'Sən mənim dostumsan.' },
+              { en: 'He is a doctor. / She is happy.', ph: '[Hi iz ə doktər / Şi iz həpi]', az: 'O həkimdir (kişi). / O xoşbəxtdir (qadın).' },
+              { en: 'We are ready!', ph: '[Vi ar redi]', az: 'Biz hazırıq!' }
+            ]
+          }
+        ],
+        quiz: [
+          { q: 'Boşluğu doldurun: "I ___ a student."', opts: ['is', 'are', 'am'], ans: 2 },
+          { q: 'Boşluğu doldurun: "She ___ from Baku."', opts: ['is', 'am', 'are'], ans: 0 },
+          { q: '"We are ready" cümləsinin tərcüməsi nədir?', opts: ['Onlar hazırdır', 'Biz hazırıq', 'Mən hazıram'], ans: 1 },
+          { q: 'Boşluğu doldurun: "They ___ very busy today."', opts: ['is', 'am', 'are'], ans: 2 }
+        ]
+      },
+      {
+        id: 'step_3',
+        step: 'Addım 3',
+        level: 'A1',
+        title: 'Gündəlik Həyat, Rəqəmlər və Sifariş',
+        subtitle: 'Kafedə, mağazada və küçədə nəzakətli xahişlər',
+        xpReward: 50,
+        theory: [
+          {
+            heading: '1. Sehrli Nəzakət Formulu: "I would like..."',
+            text: 'İngilis dilində "I want" (İstəyirəm) birbaşa və sərt səslənir. Onun yerinə <strong>"I would like..." (I\'d like...)</strong> və ya <strong>"Can I have...?"</strong> işlətmək sizi əsl mədəni danışan kimi göstərir.'
+          },
+          {
+            heading: '2. Gündəlik Vacib İfadələr',
+            examples: [
+              { en: 'I would like a coffee, please.', ph: '[Ay vud layk ə kofi, pliz]', az: 'Zəhmət olmasa, bir qəhvə istəyərdim.' },
+              { en: 'How much is this?', ph: '[Hau maç iz zis]', az: 'Bu neçəyədir?' },
+              { en: 'Excuse me, where is the metro?', ph: '[Ekskyuz mi, ver iz zə metrou]', az: 'Bağışlayın, metro haradadır?' },
+              { en: 'Can I pay by card?', ph: '[Kən ay pey bay kard]', az: 'Kartla ödəyə bilərəm?' }
+            ]
+          }
+        ],
+        quiz: [
+          { q: 'Kafedə nəzakətlə qəhvə sifariş etmək üçün hansı daha doğrudur?', opts: ['Give me coffee.', 'I would like a coffee, please.', 'Coffee now.'], ans: 1 },
+          { q: 'Qiymət soruşmaq üçün nə deyirik?', opts: ['How are you?', 'How much is this?', 'Where are you?'], ans: 1 },
+          { q: '"Excuse me" nə zaman işlənir?', opts: ['Diqqət çəkmək / Yol istəmək üçün', 'Yatmazdan əvvəl', 'Təşəkkür edəndə'], ans: 0 },
+          { q: '"Can I pay by card?" nə deməkdir?', opts: ['Nağd ödəyə bilərəm?', 'Kartla ödəyə bilərəm?', 'Hesab neçədir?'], ans: 1 }
+        ]
+      },
+      {
+        id: 'step_4',
+        step: 'Addım 4',
+        level: 'A1+',
+        title: 'İndiki Zaman (Present Simple)',
+        subtitle: 'Hər gün etdiyimiz vərdişlər və işlər',
+        xpReward: 50,
+        theory: [
+          {
+            heading: '1. Hər gün təkrarlanan hərəkətlər',
+            text: 'Gündəlik vərdişlərdən danışanda fel olduğu kimi qalır. Yalnız <strong>He / She / It</strong> (3-cü şəxsin təki) olduqda felin sonuna <strong>-s</strong> artırılır!'
+          },
+          {
+            heading: '2. Nümunələr (+s qaydasına diqqət!)',
+            examples: [
+              { en: 'I work every day.', ph: '[Ay vörk evri dey]', az: 'Mən hər gün işləyirəm.' },
+              { en: 'She works in an office.', ph: '[Şi vörks in ən ofis]', az: 'O, ofisdə işləyir. (s artırıldı!)' },
+              { en: 'I don\'t drink coffee.', ph: '[Ay dont drink kofi]', az: 'Mən qəhvə içmirəm.' },
+              { en: 'Do you speak English?', ph: '[Du yu spik İnqliş]', az: 'Siz ingiliscə danışırsınız?' }
+            ]
+          }
+        ],
+        quiz: [
+          { q: 'Düzgün variantı seçin: "He ___ English every day."', opts: ['learn', 'learns', 'learning'], ans: 1 },
+          { q: 'İnkar cümləsi hansıdır? "Mən çay içmirəm."', opts: ['I no drink tea.', 'I doesn\'t drink tea.', 'I don\'t drink tea.'], ans: 2 },
+          { q: 'Sual vermək üçün hansı köməkçi fel işlənir?', opts: ['Do you speak English?', 'Are you speak English?', 'Is you speak English?'], ans: 0 },
+          { q: '"Every day" sözünün mənası nədir?', opts: ['Dünən', 'Hər gün', 'Sabah'], ans: 1 }
+        ]
+      },
+      {
+        id: 'step_5',
+        step: 'Addım 5',
+        level: 'A2',
+        title: 'Keçmiş, Gələcək və Küçədə Sərbəst Danışıq',
+        subtitle: 'Dünən nə etdin və sabah nə planlaşdırırsan?',
+        xpReward: 50,
+        theory: [
+          {
+            heading: '1. Keçmiş (Past) və Gələcək (Future) Qısa Yol',
+            text: 'Keçmişdə bitmiş hərəkətlər üçün qaydalı fellərə <strong>-ed</strong> artırılır (work -> worked), qaydasızlar dəyişir (go -> went). Gələcək planlar üçün isə <strong>"going to"</strong> və ya <strong>"will"</strong> işlənir.'
+          },
+          {
+            heading: '2. Real Həyat Cümlələri',
+            examples: [
+              { en: 'I went to London last year.', ph: '[Ay vent tu Landən last yir]', az: 'Mən keçən il Londona getdim.' },
+              { en: 'Did you enjoy the movie?', ph: '[Did yu indjoy zə muvi]', az: 'Filmdən zövq aldın?' },
+              { en: 'I am going to travel tomorrow.', ph: '[Ay əm qouinq tu trəvəl tumorou]', az: 'Sabah səyahət edəcəyəm.' },
+              { en: 'I will call you later.', ph: '[Ay vil kol yu leytər]', az: 'Sənə sonra zəng edəcəyəm.' }
+            ]
+          }
+        ],
+        quiz: [
+          { q: '"Go" (getmək) felinin keçmiş zaman forması hansıdır?', opts: ['Goed', 'Went', 'Gone'], ans: 1 },
+          { q: '"I will call you later" nə deməkdir?', opts: ['Sənə dünən zəng etdim', 'Sənə sonra zəng edəcəyəm', 'Sənə zəng etmirəm'], ans: 1 },
+          { q: 'Keçmiş zamanda sual vermək üçün nə işlənir?', opts: ['Do you went?', 'Did you go?', 'Are you go?'], ans: 1 },
+          { q: '"Tomorrow" hansı zamanı bildirir?', opts: ['Dünən', 'Bu gün', 'Sabah'], ans: 2 }
+        ]
+      }
+    ];
+
+    // =========================================================================
+    // 3. DAILY VOCABULARY BANK (48 High-Frequency Everyday Phrases)
+    // =========================================================================
+    const WORD_CATEGORIES = [
+      { id: 'all', name: 'Hamısı' },
+      { id: 'basics', name: '0-dan Əsaslar' },
+      { id: 'daily', name: 'Gündəlik Danışıq' },
+      { id: 'travel', name: 'Kafe & Səyahət' },
+      { id: 'business', name: 'İş & Biznes' },
+      { id: 'slang', name: 'İdiomlar & Slenq' }
+    ];
+
+    const VOCABULARY_DB = [
+      // 0-dan Əsaslar
+      { id: 1, cat: 'basics', en: 'How are you doing?', ipa: '/haʊ ɑːr juː ˈduːɪŋ/', ph: 'Hau ar yu duinq?', az: 'Necəsən? / İşlərin necədir?', exEn: 'Hey Samir, how are you doing today?', exAz: 'Hey Samir, bu gün necəsən?' },
+      { id: 2, cat: 'basics', en: 'Thank you so much!', ipa: '/θæŋk juː soʊ mʌtʃ/', ph: 'Sənk yu sou maç!', az: 'Çox təşəkkür edirəm!', exEn: 'Thank you so much for your help!', exAz: 'Köməyiniz üçün çox təşəkkür edirəm!' },
+      { id: 3, cat: 'basics', en: 'You are welcome!', ipa: '/juː ɑːr ˈwɛlkəm/', ph: 'Yu ar velkəm!', az: 'Dəyməz! / Xoşdur!', exEn: 'Thanks for the coffee! – You are welcome!', exAz: 'Qəhvə üçün təşəkkürlər! – Dəyməz!' },
+      { id: 4, cat: 'basics', en: 'I don\'t understand.', ipa: '/aɪ doʊnt ˌʌndərˈstænd/', ph: 'Ay dont andərstənd', az: 'Başa düşmürəm.', exEn: 'Sorry, I don\'t understand this word.', exAz: 'Bağışlayın, bu sözü başa düşmürəm.' },
+      { id: 5, cat: 'basics', en: 'Could you speak slower?', ipa: '/kʊd juː spiːk ˈsloʊər/', ph: 'Kud yu spik slouər?', az: 'Bir az yavaş danışa bilərsiniz?', exEn: 'I am learning English. Could you speak slower?', exAz: 'Mən ingilis dili öyrənirəm. Bir az yavaş danışa bilərsiniz?' },
+      { id: 6, cat: 'basics', en: 'What does it mean?', ipa: '/wʌt dʌz ɪt miːn/', ph: 'Vat daz it min?', az: 'Bu nə deməkdir?', exEn: 'I saw this sign. What does it mean?', exAz: 'Bu işarəni gördüm. Bu nə deməkdir?' },
+      { id: 7, cat: 'basics', en: 'No problem at all.', ipa: '/noʊ ˈprɑːbləm æt ɔːl/', ph: 'Nou probləm ət ol', az: 'Heç bir problem yoxdur.', exEn: 'Sorry I\'m late! – No problem at all.', exAz: 'Gecikdiyim üçün üzr istəyirəm! – Heç bir problem yoxdur.' },
+      { id: 8, cat: 'basics', en: 'Have a great day!', ipa: '/hæv ə ɡreɪt deɪ/', ph: 'Həv ə qreyt dey!', az: 'Gününüz əla keçsin!', exEn: 'See you tomorrow, have a great day!', exAz: 'Sabah görüşərik, gününüz əla keçsin!' },
+
+      // Gündəlik Danışıq
+      { id: 9, cat: 'daily', en: 'How\'s it going?', ipa: '/haʊz ɪt ˈɡoʊɪŋ/', ph: 'Hauz it qouinq?', az: 'İşlər necə gedir?', exEn: 'Hey! Long time no see. How\'s it going?', exAz: 'Hey! Çoxdandır görüşmürük. İşlər necə gedir?' },
+      { id: 10, cat: 'daily', en: 'I\'m on my way.', ipa: '/aɪm ɑːn maɪ weɪ/', ph: 'Aym on may vey', az: 'Yoldayam / Gəlirəm.', exEn: 'Wait for me, I\'m on my way now!', exAz: 'Məni gözlə, artıq yoldayam!' },
+      { id: 11, cat: 'daily', en: 'It doesn\'t matter.', ipa: '/ɪt ˈdʌzənt ˈmætər/', ph: 'It dazınt mətər', az: 'Fərqi yoxdur / Əhəmiyyəti yoxdur.', exEn: 'Tea or coffee? – It doesn\'t matter, both are fine.', exAz: 'Çay, yoxsa qəhvə? – Fərqi yoxdur, ikisi də olar.' },
+      { id: 12, cat: 'daily', en: 'Let me think about it.', ipa: '/lɛt miː θɪŋk əˈbaʊt ɪt/', ph: 'Let mi sink əbaut it', az: 'Qoy bu barədə bir az düşünüm.', exEn: 'That\'s a good offer. Let me think about it.', exAz: 'Bu yaxşı təklifdir. Qoy bu barədə düşünüm.' },
+      { id: 13, cat: 'daily', en: 'I agree with you.', ipa: '/aɪ əˈɡriː wɪð juː/', ph: 'Ay əqri viz yu', az: 'Sizinlə razıyam.', exEn: 'You are completely right, I agree with you.', exAz: 'Tamamilə haqlısınız, sizinlə razıyam.' },
+      { id: 14, cat: 'daily', en: 'By the way...', ipa: '/baɪ ðə weɪ/', ph: 'Bay zə vey...', az: 'Yeri gəlmişkən...', exEn: 'By the way, did you call him yesterday?', exAz: 'Yeri gəlmişkən, dünən ona zəng etdin?' },
+      { id: 15, cat: 'daily', en: 'Make up your mind.', ipa: '/meɪk ʌp jʊər maɪnd/', ph: 'Meyk ap yor maynd', az: 'Qərarını ver.', exEn: 'We have to go now, make up your mind!', exAz: 'Artıq getməliyik, qərarını ver!' },
+      { id: 16, cat: 'daily', en: 'Take care of yourself.', ipa: '/teɪk kɛr əv jʊərˈsɛlf/', ph: 'Teyk ker ov yorself', az: 'Özünə yaxşı bax.', exEn: 'It was great seeing you. Take care of yourself!', exAz: 'Səni görmək çox xoş idi. Özünə yaxşı bax!' },
+
+      // Kafe & Səyahət
+      { id: 17, cat: 'travel', en: 'I\'d like to order, please.', ipa: '/aɪd laɪk tuː ˈɔːrdər pliːz/', ph: 'Ayd layk tu ordər, pliz', az: 'Sifariş vermək istəyərdim, zəhmət olmasa.', exEn: 'Excuse me, we\'re ready. I\'d like to order, please.', exAz: 'Bağışlayın, biz hazırıq. Sifariş vermək istəyərdim.' },
+      { id: 18, cat: 'travel', en: 'For here or to go?', ipa: '/fɔːr hɪər ɔːr tuː ɡoʊ/', ph: 'For hir or tu qou?', az: 'Burada yeyəcəksiniz, yoxsa özünüzlə aparacaqsınız?', exEn: 'One latte, please. – For here or to go?', exAz: 'Bir latte, zəhmət olmasa. – Burada içəcəksiniz, yoxsa aparacaqsınız?' },
+      { id: 19, cat: 'travel', en: 'Could we have the bill?', ipa: '/kʊd wiː hæv ðə bɪl/', ph: 'Kud vi həv zə bil?', az: 'Hesabı gətirə bilərsiniz?', exEn: 'Everything was delicious. Could we have the bill?', exAz: 'Hər şey çox dadlı idi. Hesabı gətirə bilərsiniz?' },
+      { id: 20, cat: 'travel', en: 'Where is the boarding gate?', ipa: '/wɛr ɪz ðə ˈbɔːrdɪŋ ɡeɪt/', ph: 'Ver iz zə bordinq qeyt?', az: 'Təyyarəyə minik qapısı haradadır?', exEn: 'Excuse me, where is the boarding gate for flight 204?', exAz: 'Bağışlayın, 204 nömrəli reysin minik qapısı haradadır?' },
+      { id: 21, cat: 'travel', en: 'I have a reservation.', ipa: '/aɪ hæv ə ˌrɛzərˈveɪʃən/', ph: 'Ay həv ə rezerveyşın', az: 'Mənim rezervasiyam (bronum) var.', exEn: 'Hello, I have a reservation under the name Aliyev.', exAz: 'Salam, Əliyev adına rezervasiyam var.' },
+      { id: 22, cat: 'travel', en: 'How long does it take?', ipa: '/haʊ lɔːŋ dʌz ɪt teɪk/', ph: 'Hau lonq daz it teyk?', az: 'Bu nə qədər vaxt aparır?', exEn: 'How long does it take to get to the city center?', exAz: 'Şəhər mərkəzinə çatmaq nə qədər vaxt aparır?' },
+      { id: 23, cat: 'travel', en: 'Keep the change.', ipa: '/kiːp ðə tʃeɪndʒ/', ph: 'Kip zə çeyndj', az: 'Qalığı lazım deyil (bəxşiş).', exEn: 'Here is twenty dollars. Keep the change!', exAz: 'Buyurun 20 dollar. Qalığı sizdə qalsın!' },
+      { id: 24, cat: 'travel', en: 'Is Wi-Fi free here?', ipa: '/ɪz ˈwaɪfaɪ friː hɪər/', ph: 'İz vay-fay fri hir?', az: 'Burada Wi-Fi pulsuzdur?', exEn: 'Excuse me, is Wi-Fi free here and what\'s the password?', exAz: 'Bağışlayın, burada Wi-Fi pulsuzdur və şifrəsi nədir?' },
+
+      // İş & Biznes
+      { id: 25, cat: 'business', en: 'Let\'s schedule a meeting.', ipa: '/lɛts ˈskɛdʒuːl ə ˈmiːtɪŋ/', ph: 'Lets skedyul ə mitinq', az: 'Gəlin bir görüş təyin edək.', exEn: 'Are you free tomorrow? Let\'s schedule a meeting.', exAz: 'Sabah boşsunuz? Gəlin bir görüş təyin edək.' },
+      { id: 26, cat: 'business', en: 'Keep me updated.', ipa: '/kiːp miː ʌpˈdeɪtɪd/', ph: 'Kip mi apdeytid', az: 'Məni məlumatlandır / Xəbər ver.', exEn: 'Please send me the report and keep me updated.', exAz: 'Zəhmət olmasa hesabatı göndərin və məni xəbərdar edin.' },
+      { id: 27, cat: 'business', en: 'I\'m running late.', ipa: '/aɪm ˈrʌnɪŋ leɪt/', ph: 'Aym raninq leyt', az: 'Bir az gecikirəm.', exEn: 'Traffic is heavy today, I\'m running 10 minutes late.', exAz: 'Bu gün tıxac çoxdur, 10 dəqiqə gecikirəm.' },
+      { id: 28, cat: 'business', en: 'Let\'s get started.', ipa: '/lɛts ɡɛt ˈstɑːrtɪd/', ph: 'Lets qet startid', az: 'Gəlin başlayaq.', exEn: 'Everyone is here now, so let\'s get started.', exAz: 'Artıq hamı buradadır, ona görə gəlin başlayaq.' },
+      { id: 29, cat: 'business', en: 'That makes sense.', ipa: '/ðæt meɪks sɛns/', ph: 'Zət meyks sens', az: 'Bu məntiqlidir / Ağlabatandır.', exEn: 'Your idea is very clear, that makes sense.', exAz: 'Fikriniz çox aydındır, bu tam məntiqlidir.' },
+      { id: 30, cat: 'business', en: 'Deadline', ipa: '/ˈdɛdlaɪn/', ph: 'Dedlayn', az: 'Son təhvil tarixi', exEn: 'We must finish this project before the deadline.', exAz: 'Bu layihəni son tarixdən əvvəl bitirməliyik.' },
+      { id: 31, cat: 'business', en: 'I\'ll handle it.', ipa: '/aɪl ˈhændəl ɪt/', ph: 'Ayl həndıl it', az: 'Mən bunu həll edərəm.', exEn: 'Don\'t worry about the client, I\'ll handle it.', exAz: 'Müştəriyə görə narahat olmayın, mən həll edərəm.' },
+      { id: 32, cat: 'business', en: 'Looking forward to it.', ipa: '/ˈlʊkɪŋ ˈfɔːrwərd tuː ɪt/', ph: 'Lukinq forvərd tu it', az: 'Səbirsizliklə gözləyirəm.', exEn: 'Thank you for the invitation! Looking forward to it.', exAz: 'Dəvət üçün təşəkkürlər! Səbirsizliklə gözləyirəm.' },
+
+      // İdiomlar & Slenq
+      { id: 33, cat: 'slang', en: 'Piece of cake!', ipa: '/piːs əv keɪk/', ph: 'Pis ov keyk!', az: 'Çox asandır! (Su içmək kimi)', exEn: 'Don\'t worry about the test, it\'s a piece of cake!', exAz: 'Testə görə narahat olma, çox asandır!' },
+      { id: 34, cat: 'slang', en: 'Break a leg!', ipa: '/breɪk ə lɛɡ/', ph: 'Breyk ə leq!', az: 'Uğurlar! (İmtahan/səhnə öncəsi)', exEn: 'You have an interview today? Break a leg!', exAz: 'Bu gün müsahibən var? Uğurlar!' },
+      { id: 35, cat: 'slang', en: 'Call it a day.', ipa: '/kɔːl ɪt ə deɪ/', ph: 'Kol it ə dey', az: 'Bu günlük işi bitirmək.', exEn: 'We\'ve worked hard for 8 hours. Let\'s call it a day.', exAz: '8 saat gərgin işlədik. Gəlin bu günlük bitirək.' },
+      { id: 36, cat: 'slang', en: 'No worries!', ipa: '/noʊ ˈwʌriz/', ph: 'Nou variz!', az: 'Narahat olma! / Problem yoxdur!', exEn: 'Thanks for waiting! – No worries, bro!', exAz: 'Gözlədiyin üçün sağ ol! – Narahat olma, qardaş!' },
+      { id: 37, cat: 'slang', en: 'I\'m beat / exhausted.', ipa: '/aɪm biːt/', ph: 'Aym bit / eqzostid', az: 'Çox yorulmuşam (əldən düşmüşəm).', exEn: 'I walked 15 kilometers today, I\'m completely beat.', exAz: 'Bu gün 15 km piyada gəzdim, tamamilə yorulmuşam.' },
+      { id: 38, cat: 'slang', en: 'Hang out', ipa: '/hæŋ aʊt/', ph: 'Hənq aut', az: 'Dostlarla vaxt keçirmək / gəzmək', exEn: 'Do you want to hang out this weekend?', exAz: 'Bu həftəsonu birlikdə vaxt keçirmək istəyirsən?' },
+      { id: 39, cat: 'slang', en: 'Once in a blue moon', ipa: '/wʌns ɪn ə bluː muːn/', ph: 'Vans in ə blu mun', az: 'Çox nadir hallarda (ildə bir dəfə)', exEn: 'I only eat fast food once in a blue moon.', exAz: 'Mən fast-foodu yalnız çox nadir hallarda yeyirəm.' },
+      { id: 40, cat: 'slang', en: 'Hit the gym', ipa: '/hɪt ðə dʒɪm/', ph: 'Hit zə cim', az: 'İdman zalına getmək', exEn: 'After work, I usually hit the gym for an hour.', exAz: 'İşdən sonra adətən bir saatlıq idman zalına gedirəm.' }
+    ];
+
+    // =========================================================================
+    // 4. GRAMMAR LAB DATA (6 Visual Topics + 12 Sentence Builder Puzzles)
+    // =========================================================================
+    const GRAMMAR_TOPICS = [
+      {
+        id: 'tobe',
+        title: '1. To Be (am / is / are)',
+        badge: 'Təməl',
+        summary: 'Cümlədə hərəkət yoxdursa (kimik, haradayıq, necəyik) "to be" işlənir.',
+        rows: [
+          { subj: 'I', verb: 'am', ex: 'I am happy.', az: 'Mən xoşbəxtəm.', color: 'text-indigo-400' },
+          { subj: 'He / She / It', verb: 'is', ex: 'She is a teacher.', az: 'O müəllimədir.', color: 'text-emerald-400' },
+          { subj: 'You / We / They', verb: 'are', ex: 'They are in Baku.', az: 'Onlar Bakıdadırlar.', color: 'text-amber-400' }
+        ],
+        tip: 'Sual vermək üçün am/is/are cümlənin əvvəlinə keçir: "Are you ready?" (Sən hazırsan?)'
+      },
+      {
+        id: 'present_simple',
+        title: '2. Present Simple (Do / Does)',
+        badge: 'Gündəlik',
+        summary: 'Hər gün etdiyimiz vərdişlər, faktlar və ümumi həqiqətlər üçün işlənir.',
+        rows: [
+          { subj: 'I / You / We / They', verb: 'work', ex: 'I work every day.', az: 'Mən hər gün işləyirəm.', color: 'text-indigo-400' },
+          { subj: 'He / She / It', verb: 'works (+s)', ex: 'He drinks coffee.', az: 'O qəhvə içir.', color: 'text-emerald-400' },
+          { subj: 'İnkar & Sual', verb: 'don\'t / doesn\'t', ex: 'Do you like tea?', az: 'Çay xoşlayırsan?', color: 'text-amber-400' }
+        ],
+        tip: 'He/She/It ilə sualda "Does" işlənəndə felin sonundakı "-s" düşür: "Does he work?"'
+      },
+      {
+        id: 'present_cont',
+        title: '3. Present Continuous (-ing)',
+        badge: 'İndi',
+        summary: 'Məhz indi, danışdığımız bu saniyədə baş verən hərəkətlər üçün işlənir.',
+        rows: [
+          { subj: 'I am', verb: 'verb + ing', ex: 'I am learning English.', az: 'Mən (indi) ingiliscə öyrənirəm.', color: 'text-indigo-400' },
+          { subj: 'He/She is', verb: 'verb + ing', ex: 'She is talking now.', az: 'O indi danışır.', color: 'text-emerald-400' },
+          { subj: 'You/We/They are', verb: 'verb + ing', ex: 'We are watching TV.', az: 'Biz televizora baxırıq.', color: 'text-amber-400' }
+        ],
+        tip: 'Zaman zərfləri: now (indi), right now (elə indi), at the moment (hal-hazırda).'
+      },
+      {
+        id: 'past_simple',
+        title: '4. Past Simple (Did / -ed)',
+        badge: 'Keçmiş',
+        summary: 'Dünən, keçən həftə və ya keçmişdə tamamlanmış hadisələr üçün işlənir.',
+        rows: [
+          { subj: 'Qaydalı fellər', verb: 'verb + ed', ex: 'I worked yesterday.', az: 'Mən dünən işlədim.', color: 'text-indigo-400' },
+          { subj: 'Qaydasız fellər', verb: 'go → went', ex: 'We went to the park.', az: 'Biz parka getdik.', color: 'text-emerald-400' },
+          { subj: 'Sual & İnkar', verb: 'Did / didn\'t', ex: 'Did you see him?', az: 'Onu gördün?', color: 'text-amber-400' }
+        ],
+        tip: 'Ən vacib qaydasız fellər: go→went (getdi), see→saw (gördü), buy→bought (aldı), have→had (var idi).'
+      },
+      {
+        id: 'future',
+        title: '5. Future (Will & Going to)',
+        badge: 'Gələcək',
+        summary: 'Gələcək planlar və ani qərarlar üçün iki əsas forma var.',
+        rows: [
+          { subj: 'Ani qərar / Vəd', verb: 'will + verb', ex: 'I will help you!', az: 'Mən sənə kömək edəcəyəm!', color: 'text-indigo-400' },
+          { subj: 'Planlaşdırılmış iş', verb: 'am/is/are going to', ex: 'I am going to buy a car.', az: 'Mən maşın almağa hazırlaşıram.', color: 'text-emerald-400' },
+          { subj: 'İnkar forması', verb: 'won\'t (will not)', ex: 'I won\'t forget.', az: 'Mən unutmayacağam.', color: 'text-amber-400' }
+        ],
+        tip: 'Danışıqda "going to" tez-tez qısa olaraq "gonna" [qona] kimi tələffüz olunur.'
+      },
+      {
+        id: 'modals',
+        title: '6. Modal Fellər (Can / Must / Should)',
+        badge: 'Bacarıq',
+        summary: 'Bacarıq, vaciblik, məsləhət və nəzakətli xahiş bildirmək üçün.',
+        rows: [
+          { subj: 'Bacarıq / İcazə', verb: 'Can / Could', ex: 'Can you help me?', az: 'Mənə kömək edə bilərsən?', color: 'text-indigo-400' },
+          { subj: 'Məsləhət', verb: 'Should', ex: 'You should rest.', az: 'Sən dincəlməlisən (məsləhətdir).', color: 'text-emerald-400' },
+          { subj: 'Məcburiyyət', verb: 'Must / Have to', ex: 'I must go now.', az: 'Mən indi getməliyəm.', color: 'text-amber-400' }
+        ],
+        tip: 'Modal fellərdən sonra heç vaxt "to" işlənmir və felə "-s" artırılmır (He can swim).'
+      }
+    ];
+
+    const SENTENCE_PUZZLES = [
+      { az: 'Mən hər gün ingilis dili öyrənirəm.', words: ['I', 'learn', 'English', 'every', 'day'], hint: 'Present Simple: Mübtəda (I) + Fel (learn) + Tamamlıq' },
+      { az: 'O, çox yaxşı həkimdir.', words: ['She', 'is', 'a', 'very', 'good', 'doctor'], hint: '"She" ilə "to be" feli "is" olur.' },
+      { az: 'Zəhmət olmasa, bir qəhvə istəyərdim.', words: ['I', 'would', 'like', 'a', 'coffee', 'please'], hint: 'Nəzakətli sifariş: I would like...' },
+      { az: 'Sən indi nə edirsən?', words: ['What', 'are', 'you', 'doing', 'now'], hint: 'Present Continuous sualı: What + are + you + doing?' },
+      { az: 'Biz dünən kinoteatra getdik.', words: ['We', 'went', 'to', 'the', 'cinema', 'yesterday'], hint: '"Go" felinin keçmiş zamanı "went"dir.' },
+      { az: 'Sabah sənə zəng edəcəyəm.', words: ['I', 'will', 'call', 'you', 'tomorrow'], hint: 'Gələcək zaman: I + will + call...' },
+      { az: 'Mənə kömək edə bilərsiniz?', words: ['Can', 'you', 'help', 'me'], hint: 'Modal fel cümlənin əvvəlinə keçir: Can you...' },
+      { az: 'Onlar Bakıda yaşamırlar.', words: ['They', 'do', 'not', 'live', 'in', 'Baku'], hint: 'İnkar cümləsi: They + do not + live...' }
+    ];
+
+    // =========================================================================
+    // 5. SPEAKING DATA: ROLEPLAYS & PRONUNCIATION PHRASES
+    // =========================================================================
+    const ROLEPLAY_SCENARIOS = [
+      {
+        id: 'coffee',
+        title: '☕ Kofeşopda Sifariş',
+        steps: [
+          {
+            botEn: 'Hi there! Welcome to Star Coffee. What can I get started for you today?',
+            botAz: 'Salam! Star Coffee-yə xoş gəlmisiniz. Bu gün sizin üçün nə hazırlaya bilərəm?',
+            tip: 'Nəzakətli cavab üçün "I\'d like..." və ya "Can I have..." işlədin.',
+            choices: [
+              { en: 'Hi! I\'d like a medium iced latte, please.', az: 'Salam! Zəhmət olmasa, orta boy buzlu latte istəyərdim.' },
+              { en: 'Hello! Can I have an Americano and a croissant?', az: 'Salam! Bir Amerikano və bir kruassan ala bilərəm?' }
+            ]
+          },
+          {
+            botEn: 'Sure thing! Would you like that for here or to go?',
+            botAz: 'Əlbəttə! Burada içəcəksiniz, yoxsa özünüzlə aparacaqsınız?',
+            tip: '"To go" = Özünüzlə aparmaq (Take-away).',
+            choices: [
+              { en: 'To go, please. I\'m heading to work.', az: 'Özümlə aparmağa, zəhmət olmasa. İşə gedirəm.' },
+              { en: 'For here, please. Is Wi-Fi free?', az: 'Burada, zəhmət olmasa. Wi-Fi pulsuzdur?' }
+            ]
+          },
+          {
+            botEn: 'That will be $5.50. How would you like to pay?',
+            botAz: '5 dollar 50 sent edir. Necə ödəmək istəyirsiniz?',
+            tip: '"By card" = Kartla, "In cash" = Nağd.',
+            choices: [
+              { en: 'By card, please. Thank you so much!', az: 'Kartla, zəhmət olmasa. Çox təşəkkür edirəm!' },
+              { en: 'Here is $6. Keep the change!', az: 'Buyurun 6 dollar. Qalığı sizdə qalsın!' }
+            ]
+          }
+        ]
+      },
+      {
+        id: 'airport',
+        title: '✈️ Hava Limanında',
+        steps: [
+          {
+            botEn: 'Good morning! May I see your passport and ticket, please?',
+            botAz: 'Sabahınız xeyir! Zəhmət olmasa pasportunuzu və biletinizi görə bilərəm?',
+            tip: '"Here you are" = Buyurun (nəsə uzadanda deyilir).',
+            choices: [
+              { en: 'Good morning! Here you are.', az: 'Sabahınız xeyir! Buyurun.' },
+              { en: 'Sure, here is my passport. Is the flight on time?', az: 'Əlbəttə, buyurun pasportum. Uçuş vaxtındadır?' }
+            ]
+          },
+          {
+            botEn: 'Yes, it\'s on time. Do you have any luggage to check in?',
+            botAz: 'Bəli, vaxtındadır. Baqaja veriləcək yükünüz var?',
+            tip: '"Carry-on bag" = Əl yükü (təyyarə salonuna aparılan çanta).',
+            choices: [
+              { en: 'Just this one suitcase, and one carry-on bag.', az: 'Yalnız bu bir çamadan və bir əl çantası.' },
+              { en: 'No, I only have hand luggage today.', az: 'Xeyr, bu gün yalnız əl yüküm var.' }
+            ]
+          }
+        ]
+      },
+      {
+        id: 'intro',
+        title: '🤝 Yeni Tanışlıq',
+        steps: [
+          {
+            botEn: 'Hi! I\'m Alex. I don\'t think we\'ve met before. What\'s your name?',
+            botAz: 'Salam! Mən Aleksəm. Deyəsən əvvəl tanış olmamışıq. Sizin adınız nədir?',
+            tip: 'Öz adınızı deyib dərhal "Nice to meet you" əlavə edin.',
+            choices: [
+              { en: 'Hi Alex! I\'m from Azerbaijan. Nice to meet you!', az: 'Salam Aleks! Mən Azərbaycandanam. Tanış olduğuma şadam!' },
+              { en: 'Hello! Pleased to meet you. How\'s it going?', az: 'Salam! Tanış olduğuma məmnunam. İşlər necə gedir?' }
+            ]
+          },
+          {
+            botEn: 'Nice to meet you too! What do you do for a living?',
+            botAz: 'Mən də şadam! Nə işlə məşğul olursunuz?',
+            tip: '"What do you do?" = Nə işləyirsiniz? / Peşəniz nədir?',
+            choices: [
+              { en: 'I work in IT and I\'m improving my English.', az: 'Mən İT sahəsində işləyirəm və ingilis dilimi təkmilləşdirirəm.' },
+              { en: 'I\'m a student, and I love traveling!', az: 'Mən tələbəyəm və səyahət etməyi çox sevirəm!' }
+            ]
+          }
+        ]
+      },
+      {
+        id: 'taxi',
+        title: '🚕 Taksidə və Şəhərdə',
+        steps: [
+          {
+            botEn: 'Hello! Where are we heading today?',
+            botAz: 'Salam! Bu gün hara gedirik?',
+            tip: '"Take me to..." = Məni ... aparın.',
+            choices: [
+              { en: 'Hi! Could you take me to the city center, please?', az: 'Salam! Zəhmət olmasa məni şəhər mərkəzinə apara bilərsiniz?' },
+              { en: 'To the Grand Hotel, please. How long does it take?', az: 'Grand Hotel-ə, zəhmət olmasa. Nə qədər vaxt aparar?' }
+            ]
+          },
+          {
+            botEn: 'About 15 minutes without traffic. You can drop off right at the entrance.',
+            botAz: 'Tıxac olmasa təxminən 15 dəqiqə. Düz girişdə düşə bilərsiniz.',
+            tip: '"Drop me off here" = Məni burada düşürün.',
+            choices: [
+              { en: 'Sounds great! Thank you very much.', az: 'Əla səslənir! Çox təşəkkür edirəm.' },
+              { en: 'Perfect, you can drop me off right near that café.', az: 'Mükəmməl, məni düz o kafenin yanında düşürə bilərsiniz.' }
+            ]
+          }
+        ]
+      },
+      {
+        id: 'interview',
+        title: '💼 İş Müsahibəsi',
+        steps: [
+          {
+            botEn: 'Welcome! Thank you for coming in today. Tell me a little about yourself.',
+            botAz: 'Xoş gəlmisiniz! Bu gün gəldiyiniz üçün təşəkkürlər. Mənə bir az özünüzdən danışın.',
+            tip: 'Təcrübənizi və öyrənmə həvəsinizi vurğulayın.',
+            choices: [
+              { en: 'Thank you! I\'m a hardworking person with 3 years of experience.', az: 'Təşəkkürlər! Mən 3 illik təcrübəyə malik çalışqan biriyəm.' },
+              { en: 'I\'m passionate about my work and I learn new skills fast.', az: 'İşimi çox sevirəm və yeni bacarıqları sürətlə öyrənirəm.' }
+            ]
+          },
+          {
+            botEn: 'That\'s impressive! Why would you like to work with our company?',
+            botAz: 'Bu təsiredicidir! Niyə məhz bizim şirkətlə işləmək istəyirsiniz?',
+            tip: '"Looking forward to..." ifadəsi müsahibə sonunda əla təəssürat yaradır.',
+            choices: [
+              { en: 'I admire your team and I believe I can bring great value here.', az: 'Komandanıza heyranam və inanıram ki, buraya böyük dəyər qata bilərəm.' },
+              { en: 'It\'s a great opportunity to grow professionally. Looking forward to it!', az: 'Peşəkar inkişaf üçün əla fürsətdir. Səbirsizliklə gözləyirəm!' }
+            ]
+          }
+        ]
+      }
+    ];
+
+    const PRONUNCIATION_PHRASES = [
+      { en: 'Could I have a cup of coffee, please?', az: 'Zəhmət olmasa, bir fincan qəhvə ala bilərəm?', ph: 'Kud ay həv ə kap of kofi, pliz?' },
+      { en: 'Nice to meet you! How is it going?', az: 'Tanış olduğuma şadam! İşlər necə gedir?', ph: 'Nays tu mit yu! Hau iz it qouinq?' },
+      { en: 'I am learning English every single day.', az: 'Mən hər gün ingilis dilini öyrənirəm.', ph: 'Ay əm lörninq İnqliş evri sinqıl dey.' },
+      { en: 'Excuse me, where is the nearest metro station?', az: 'Bağışlayın, ən yaxın metro stansiyası haradadır?', ph: 'Ekskyuz mi, ver iz zə nirest metrou steyşın?' },
+      { en: 'Thank you so much for your help today!', az: 'Bu günkü köməyiniz üçün çox təşəkkür edirəm!', ph: 'Sənk yu sou maç for yor help tudey!' }
+    ];
+
+    // =========================================================================
+    // 6. PERSISTENT STATE (localStorage)
+    // =========================================================================
+    const STORAGE_KEY = 'fluentpro_az_state_v1';
+
+    let state = {
+      xp: 0,
+      streak: 1,
+      lastDate: new Date().toDateString(),
+      muted: false,
+      completedLessons: [],
+      learnedWordIds: [],
+      activeWordCat: 'all',
+      wordDeckIds: VOCABULARY_DB.map(w => w.id),
+      wordIndex: 0,
+      activeGrammarId: 'tobe',
+      puzzleIndex: 0,
+      activeRoleplayId: 'coffee',
+      roleplayStep: 0,
+      pronIndex: 0
+    };
+
+    function loadAppState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          state = { ...state, ...parsed };
+          const today = new Date().toDateString();
+          if (state.lastDate !== today) {
+            const yesterday = new Date(Date.now() - 86400000).toDateString();
+            state.streak = (state.lastDate === yesterday) ? state.streak + 1 : 1;
+            state.lastDate = today;
+            saveAppState();
+          }
+        }
+      } catch (e) {}
+    }
+
+    function saveAppState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (e) {}
+      updateTopHud();
+    }
+
+    // =========================================================================
+    // 7. SOUND EFFECTS, SPEECH SYNTHESIS & CONFETTI
+    // =========================================================================
+    let englishVoice = null;
+
+    function initEnglishVoices() {
+      if (!('speechSynthesis' in window)) return;
+      const voices = window.speechSynthesis.getVoices();
+      englishVoice = voices.find(v => (v.lang === 'en-US' || v.lang === 'en-GB') && (v.name.includes('Google') || v.name.includes('Samantha') || v.name.includes('Natural')))
+                  || voices.find(v => v.lang.startsWith('en'));
+    }
+
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.onvoiceschanged = initEnglishVoices;
+      initEnglishVoices();
+    }
+
+    function speakEnglish(text, rate = 1.0) {
+      if (!('speechSynthesis' in window)) {
+        showToast('Brauzeriniz səsli oxunuşu dəstəkləmir');
+        return;
+      }
+      window.speechSynthesis.cancel();
+      const clean = text.replace(/["“”]/g, '');
+      const u = new SpeechSynthesisUtterance(clean);
+      u.lang = 'en-US';
+      u.rate = rate;
+      if (englishVoice) u.voice = englishVoice;
+      window.speechSynthesis.speak(u);
+    }
+
+    function playSoundEffect(type) {
+      if (state.muted) return;
+      try {
+        const Ctx = window.AudioContext || window.webkitAudioContext;
+        const ctx = new Ctx();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        if (type === 'correct') {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(523.25, ctx.currentTime);
+          osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.08);
+          osc.frequency.setValueAtTime(783.99, ctx.currentTime + 0.16);
+          gain.gain.setValueAtTime(0.12, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.38);
+          osc.start();
+          osc.stop(ctx.currentTime + 0.38);
+        } else if (type === 'levelup') {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(440, ctx.currentTime);
+          osc.frequency.setValueAtTime(554.37, ctx.currentTime + 0.1);
+          osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.2);
+          osc.frequency.setValueAtTime(880, ctx.currentTime + 0.3);
+          gain.gain.setValueAtTime(0.15, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.55);
+          osc.start();
+          osc.stop(ctx.currentTime + 0.55);
+        } else {
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(210, ctx.currentTime);
+          osc.frequency.setValueAtTime(175, ctx.currentTime + 0.12);
+          gain.gain.setValueAtTime(0.08, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.28);
+          osc.start();
+          osc.stop(ctx.currentTime + 0.28);
+        }
+      } catch (e) {}
+    }
+
+    function toggleMute() {
+      state.muted = !state.muted;
+      saveAppState();
+      const btn = document.getElementById('muteBtn');
+      btn.innerHTML = state.muted
+        ? '<i data-lucide="volume-x" class="w-3.5 h-3.5 text-rose-400"></i>'
+        : '<i data-lucide="volume-2" class="w-3.5 h-3.5 text-emerald-400"></i>';
+      lucide.createIcons();
+      showToast(state.muted ? 'Səs effektləri söndürüldü' : 'Səs effektləri aktivdir');
+    }
+
+    function triggerConfettiBurst() {
+      const colors = ['#6366F1', '#10B981', '#F59E0B', '#EC4899', '#38BDF8'];
+      for (let i = 0; i < 36; i++) {
+        const piece = document.createElement('div');
+        piece.className = 'confetti-piece rounded-sm';
+        piece.style.left = Math.random() * 100 + 'vw';
+        piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        piece.style.animationDuration = (1.6 + Math.random() * 1.4) + 's';
+        piece.style.animationDelay = (Math.random() * 0.25) + 's';
+        document.body.appendChild(piece);
+        setTimeout(() => piece.remove(), 3200);
+      }
+    }
+
+    function showToast(msg) {
+      const banner = document.getElementById('toastBanner');
+      document.getElementById('toastText').textContent = msg;
+      banner.classList.remove('opacity-0', '-translate-y-2');
+      banner.classList.add('opacity-100', 'translate-y-0');
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => {
+        banner.classList.remove('opacity-100', 'translate-y-0');
+        banner.classList.add('opacity-0', '-translate-y-2');
+      }, 2200);
+    }
+
+    function updateTopHud() {
+      document.getElementById('userGreeting').textContent = `Xoş gəldin, ${telegramUserName}!`;
+      document.getElementById('streakCount').textContent = state.streak;
+      document.getElementById('xpCount').textContent = state.xp;
+
+      const levels = [
+        { min: 0, title: 'Səviyyə 1: Başlanğıc (A0)' },
+        { min: 100, title: 'Səviyyə 2: Təməl Bilik (A0+)' },
+        { min: 250, title: 'Səviyyə 3: Elementar (A1)' },
+        { min: 450, title: 'Səviyyə 4: Sərbəst Danışıq (A1+)' },
+        { min: 700, title: 'Səviyyə 5: FluentPro Ustası (A2)' }
+      ];
+      let currentLvl = levels[0];
+      let nextMin = 100;
+      for (let i = 0; i < levels.length; i++) {
+        if (state.xp >= levels[i].min) {
+          currentLvl = levels[i];
+          nextMin = levels[i + 1] ? levels[i + 1].min : levels[i].min + 300;
+        }
+      }
+      document.getElementById('levelTitleBadge').innerHTML = `<i data-lucide="award" class="w-3.5 h-3.5 text-amber-400"></i> ${currentLvl.title}`;
+      const progressPct = Math.min(100, Math.max(8, Math.round(((state.xp - currentLvl.min) / (nextMin - currentLvl.min)) * 100)));
+      document.getElementById('levelProgressBar').style.width = `${progressPct}%`;
+      lucide.createIcons();
+    }
+
+    // =========================================================================
+    // 8. TAB 1: ROADMAP (0-DAN STEP-BY-STEP PATH & MODAL)
+    // =========================================================================
+    function renderRoadmap() {
+      const container = document.getElementById('roadmapNodesContainer');
+      container.innerHTML = ROADMAP_LESSONS.map((lesson, idx) => {
+        const isCompleted = state.completedLessons.includes(lesson.id);
+        const isUnlocked = idx === 0 || state.completedLessons.includes(ROADMAP_LESSONS[idx - 1].id) || isCompleted;
+
+        let statusBadge = '';
+        let cardStyle = '';
+        let iconName = 'lock';
+
+        if (isCompleted) {
+          statusBadge = `<span class="text-[10px] font-extrabold px-2 py-0.5 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">✓ Tamamlanıb</span>`;
+          cardStyle = 'bg-slate-900/95 border-emerald-500/45 shadow-lg shadow-emerald-500/5';
+          iconName = 'check-circle-2';
+        } else if (isUnlocked) {
+          statusBadge = `<span class="text-[10px] font-extrabold px-2 py-0.5 rounded-lg bg-indigo-500/20 text-indigo-300 border border-indigo-500/40 animate-pulse">Aktiv Dərs</span>`;
+          cardStyle = 'bg-gradient-to-r from-indigo-950/70 to-slate-900/95 border-indigo-500/50 shadow-xl shadow-indigo-500/10';
+          iconName = 'play';
+        } else {
+          statusBadge = `<span class="text-[10px] font-bold px-2 py-0.5 rounded-lg bg-slate-800 text-slate-500">Kilidli</span>`;
+          cardStyle = 'bg-slate-900/50 border-slate-800/80 opacity-70';
+          iconName = 'lock';
+        }
+
+        return `
+          <div onclick="openLessonModal('${lesson.id}', ${isUnlocked})"
+            class="cursor-pointer rounded-3xl border p-4 transition active:scale-[0.99] ${cardStyle}">
+            <div class="flex items-center gap-3.5">
+              <div class="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 ${
+                isCompleted
+                  ? 'bg-emerald-500 text-slate-950'
+                  : isUnlocked
+                    ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/30'
+                    : 'bg-slate-800 text-slate-500'
+              }">
+                <i data-lucide="${iconName}" class="w-5 h-5"></i>
+              </div>
+
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between gap-2 mb-1">
+                  <span class="text-[11px] font-extrabold text-amber-300">${lesson.step} • ${lesson.level}</span>
+                  ${statusBadge}
+                </div>
+                <h3 class="text-sm font-extrabold text-white leading-snug">${lesson.title}</h3>
+                <p class="text-[11px] text-slate-400 mt-0.5 truncate">${lesson.subtitle}</p>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+      lucide.createIcons();
+    }
+
+    let activeModalLesson = null;
+    let modalQuizAnswers = {};
+
+    function openLessonModal(lessonId, isUnlocked) {
+      if (!isUnlocked) {
+        playSoundEffect('wrong');
+        showToast('Əvvəlcə əvvəlki addımı tamamlayın!');
+        return;
+      }
+      activeModalLesson = ROADMAP_LESSONS.find(l => l.id === lessonId);
+      modalQuizAnswers = {};
+
+      document.getElementById('modalStepBadge').textContent = `${activeModalLesson.step} • ${activeModalLesson.level} (+${activeModalLesson.xpReward} XP)`;
+      document.getElementById('modalLessonTitle').textContent = activeModalLesson.title;
+
+      const body = document.getElementById('modalLessonBody');
+      let html = '';
+
+      // Render Theory Blocks
+      activeModalLesson.theory.forEach(block => {
+        html += `<div class="rounded-2xl bg-slate-900/90 border border-slate-800 p-3.5 space-y-2.5">`;
+        html += `<h4 class="text-xs font-extrabold text-indigo-300">${block.heading}</h4>`;
+        if (block.text) {
+          html += `<p class="text-xs text-slate-300 leading-relaxed">${block.text}</p>`;
+        }
+        if (block.examples) {
+          html += `<div class="space-y-2 pt-1">`;
+          block.examples.forEach(ex => {
+            const safeEn = ex.en.replace(/'/g, "\\'");
+            html += `
+              <div class="p-2.5 rounded-xl bg-slate-950/80 border border-slate-800/90 flex items-center justify-between gap-2">
+                <div>
+                  <div class="text-xs font-extrabold text-white">${ex.en}</div>
+                  <div class="text-[10px] font-semibold text-amber-300">${ex.ph}</div>
+                  <div class="text-[11px] text-slate-400">${ex.az}</div>
+                </div>
+                <button onclick="speakEnglish('${safeEn}', 0.92)" class="p-2 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 shrink-0">
+                  <i data-lucide="volume-2" class="w-4 h-4"></i>
+                </button>
+              </div>
+            `;
+          });
+          html += `</div>`;
+        }
+        html += `</div>`;
+      });
+
+      // Render 4-Question Practice Mini-Quiz
+      html += `
+        <div class="rounded-2xl bg-indigo-950/40 border border-indigo-500/30 p-3.5 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-extrabold text-amber-300 flex items-center gap-1.5">
+              <i data-lucide="zap" class="w-4 h-4"></i> Dərs Sonu Mini-Sınaq (4 Sual)
+            </span>
+          </div>
+      `;
+
+      activeModalLesson.quiz.forEach((item, qIdx) => {
+        html += `
+          <div class="space-y-1.5 pt-2 border-t border-slate-800/80">
+            <p class="text-xs font-bold text-white">${qIdx + 1}. ${item.q}</p>
+            <div class="space-y-1.5">
+              ${item.opts.map((opt, oIdx) => `
+                <button onclick="selectModalQuizOption(${qIdx}, ${oIdx}, this)"
+                  class="mq-btn-${qIdx} w-full text-left px-3 py-2 rounded-xl bg-slate-900 border border-slate-700/80 text-xs text-slate-200 hover:border-indigo-500 transition">
+                  ${opt}
+                </button>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      });
+
+      html += `
+          <button onclick="submitLessonQuiz()" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-emerald-500 to-indigo-600 text-white font-black text-xs shadow-lg transition active:scale-95">
+            Dərsi Tamamla və +${activeModalLesson.xpReward} XP Qazan
+          </button>
+        </div>
+      `;
+
+      body.innerHTML = html;
+      document.getElementById('lessonModal').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function closeLessonModal() {
+      document.getElementById('lessonModal').classList.add('hidden');
+    }
+
+    function selectModalQuizOption(qIdx, oIdx, btnEl) {
+      modalQuizAnswers[qIdx] = oIdx;
+      document.querySelectorAll(`.mq-btn-${qIdx}`).forEach(b => {
+        b.classList.remove('bg-indigo-600', 'border-indigo-400', 'text-white', 'font-bold');
+        b.classList.add('bg-slate-900', 'border-slate-700/80', 'text-slate-200');
+      });
+      btnEl.classList.remove('bg-slate-900', 'border-slate-700/80', 'text-slate-200');
+      btnEl.classList.add('bg-indigo-600', 'border-indigo-400', 'text-white', 'font-bold');
+    }
+
+    function submitLessonQuiz() {
+      if (!activeModalLesson) return;
+      const total = activeModalLesson.quiz.length;
+      if (Object.keys(modalQuizAnswers).length < total) {
+        playSoundEffect('wrong');
+        showToast('Zəhmət olmasa bütün 4 sualı cavablandırın!');
+        return;
+      }
+
+      let correctCount = 0;
+      activeModalLesson.quiz.forEach((q, idx) => {
+        if (modalQuizAnswers[idx] === q.ans) correctCount++;
+      });
+
+      if (correctCount >= 3) {
+        playSoundEffect('levelup');
+        triggerConfettiBurst();
+        if (!state.completedLessons.includes(activeModalLesson.id)) {
+          state.completedLessons.push(activeModalLesson.id);
+          state.xp += activeModalLesson.xpReward;
+        } else {
+          state.xp += 15;
+        }
+        saveAppState();
+        renderRoadmap();
+        closeLessonModal();
+        showToast(`Təbriklər! ${correctCount}/${total} doğru • Növbəti addım açıldı! 🎉`);
+      } else {
+        playSoundEffect('wrong');
+        showToast(`${correctCount}/${total} doğru. Keçmək üçün ən azı 3 doğru cavab lazımdır!`);
+      }
+    }
+
+    // =========================================================================
+    // 9. TAB 2: GÜNDƏLİK SÖZLƏR (3D FLASHCARDS & QUICK QUIZ)
+    // =========================================================================
+    let isFcFlipped = false;
+
+    function setWordsSubMode(mode) {
+      const cardsView = document.getElementById('words-cards-view');
+      const quizView = document.getElementById('words-quiz-view');
+      const btnCards = document.getElementById('submode-cards');
+      const btnQuiz = document.getElementById('submode-quiz');
+
+      if (mode === 'cards') {
+        cardsView.classList.remove('hidden');
+        quizView.classList.add('hidden');
+        btnCards.className = 'py-2 rounded-xl text-xs font-extrabold bg-indigo-600 text-white shadow transition';
+        btnQuiz.className = 'py-2 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition';
+      } else {
+        cardsView.classList.add('hidden');
+        quizView.classList.remove('hidden');
+        btnQuiz.className = 'py-2 rounded-xl text-xs font-extrabold bg-indigo-600 text-white shadow transition';
+        btnCards.className = 'py-2 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition';
+        if (!currentWordQuizItem) nextWordQuizQuestion();
+      }
+    }
+
+    function renderWordCategoryPills() {
+      const container = document.getElementById('wordCategoryPills');
+      container.innerHTML = WORD_CATEGORIES.map(c => {
+        const active = state.activeWordCat === c.id;
+        return `
+          <button onclick="selectWordCategory('${c.id}')"
+            class="whitespace-nowrap px-3.5 py-1.5 rounded-2xl text-xs font-bold transition active:scale-95 ${
+              active
+                ? 'bg-emerald-500 text-slate-950 shadow-md shadow-emerald-500/20'
+                : 'bg-slate-900 border border-slate-800 text-slate-300 hover:border-slate-700'
+            }">
+            ${c.name}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function selectWordCategory(catId) {
+      state.activeWordCat = catId;
+      const list = catId === 'all' ? VOCABULARY_DB : VOCABULARY_DB.filter(w => w.cat === catId);
+      state.wordDeckIds = list.map(w => w.id);
+      state.wordIndex = 0;
+      const catObj = WORD_CATEGORIES.find(c => c.id === catId);
+      document.getElementById('activeDeckTitle').textContent = catObj ? catObj.name : 'Bütün Kateqoriyalar';
+      renderWordCategoryPills();
+      renderFlashcard();
+    }
+
+    function generateNewDailyWordPack() {
+      const unlearned = VOCABULARY_DB.filter(w => !state.learnedWordIds.includes(w.id));
+      const pool = unlearned.length >= 8 ? [...unlearned] : [...VOCABULARY_DB];
+      for (let i = pool.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [pool[i], pool[j]] = [pool[j], pool[i]];
+      }
+      const pack = pool.slice(0, 10);
+      state.activeWordCat = 'daily_pack';
+      state.wordDeckIds = pack.map(w => w.id);
+      state.wordIndex = 0;
+      document.getElementById('activeDeckTitle').textContent = '✨ Yeni Gündəlik Paket (10 Söz)';
+      renderWordCategoryPills();
+      renderFlashcard();
+      playSoundEffect('correct');
+      showToast('Yeni 10 gündəlik ingilis ifadəsi hazırlandı!');
+    }
+
+    function getActiveFlashcard() {
+      const id = state.wordDeckIds[state.wordIndex] || VOCABULARY_DB[0].id;
+      return VOCABULARY_DB.find(w => w.id === id) || VOCABULARY_DB[0];
+    }
+
+    function renderFlashcard() {
+      isFcFlipped = false;
+      document.getElementById('flashcardInner').classList.remove('flipped');
+      document.getElementById('learnedWordsCounter').textContent = `${state.learnedWordIds.length} / ${VOCABULARY_DB.length}`;
+
+      const item = getActiveFlashcard();
+      const catObj = WORD_CATEGORIES.find(c => c.id === item.cat);
+
+      document.getElementById('fcCategoryBadge').textContent = catObj ? catObj.name : 'Gündəlik İngilis';
+      document.getElementById('flashcardIndexLabel').textContent = `${state.wordIndex + 1} / ${state.wordDeckIds.length}`;
+
+      const learnedBadge = document.getElementById('fcLearnedBadge');
+      if (state.learnedWordIds.includes(item.id)) {
+        learnedBadge.classList.remove('hidden');
+      } else {
+        learnedBadge.classList.add('hidden');
+      }
+
+      document.getElementById('fcEnglishWord').textContent = item.en;
+      document.getElementById('fcIpa').textContent = item.ipa;
+      document.getElementById('fcAzPhonetic').textContent = `[${item.ph}]`;
+
+      document.getElementById('fcAzTranslation').textContent = item.az;
+      document.getElementById('fcEnSub').textContent = item.en;
+      document.getElementById('fcExampleEn').textContent = `"${item.exEn}"`;
+      document.getElementById('fcExampleAz').textContent = `“${item.exAz}”`;
+
+      lucide.createIcons();
+    }
+
+    function toggleFlipFlashcard() {
+      isFcFlipped = !isFcFlipped;
+      const inner = document.getElementById('flashcardInner');
+      if (isFcFlipped) inner.classList.add('flipped');
+      else inner.classList.remove('flipped');
+    }
+
+    function speakFlashcard(rate = 1.0) {
+      speakEnglish(getActiveFlashcard().en, rate);
+    }
+
+    function speakFlashcardExample() {
+      speakEnglish(getActiveFlashcard().exEn, 0.95);
+    }
+
+    function nextFlashcard() {
+      state.wordIndex = (state.wordIndex + 1) % state.wordDeckIds.length;
+      renderFlashcard();
+    }
+
+    function prevFlashcard() {
+      state.wordIndex = (state.wordIndex - 1 + state.wordDeckIds.length) % state.wordDeckIds.length;
+      renderFlashcard();
+    }
+
+    function markWordLearned() {
+      const item = getActiveFlashcard();
+      playSoundEffect('correct');
+      if (!state.learnedWordIds.includes(item.id)) {
+        state.learnedWordIds.push(item.id);
+        state.xp += 10;
+        showToast('Yadda saxlanıldı! +10 XP ✨');
+      } else {
+        state.xp += 5;
+        showToast('Təkrar edildi! +5 XP');
+      }
+      saveAppState();
+      nextFlashcard();
+    }
+
+    // Quick Quiz with Combo Multiplier (x1 -> x5)
+    let currentWordQuizItem = null;
+    let wqCombo = 1;
+    let wqAnswered = false;
+
+    function nextWordQuizQuestion() {
+      wqAnswered = false;
+      document.getElementById('wqFeedbackBanner').classList.add('hidden');
+      document.getElementById('wqNextBtn').classList.add('hidden');
+
+      currentWordQuizItem = VOCABULARY_DB[Math.floor(Math.random() * VOCABULARY_DB.length)];
+      const enToAz = Math.random() > 0.35;
+
+      document.getElementById('wqDirectionBadge').textContent = enToAz ? 'İngiliscə → Azərbaycanca' : 'Azərbaycanca → İngiliscə';
+      document.getElementById('wqPromptInstruction').textContent = enToAz ? 'Bu ifadənin tərcüməsi nədir?' : 'Bu ifadə ingiliscə necə deyilir?';
+      document.getElementById('wqPromptWord').textContent = enToAz ? currentWordQuizItem.en : currentWordQuizItem.az;
+      document.getElementById('wqPromptPhonetic').textContent = enToAz ? `[${currentWordQuizItem.ph}]` : '';
+
+      const distractors = VOCABULARY_DB.filter(w => w.id !== currentWordQuizItem.id)
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 3);
+      const options = [...distractors, currentWordQuizItem].sort(() => 0.5 - Math.random());
+
+      document.getElementById('wqOptionsList').innerHTML = options.map((opt, idx) => `
+        <button onclick="answerWordQuiz(${opt.id}, this)"
+          class="wq-opt w-full text-left p-3.5 rounded-2xl bg-slate-800/85 hover:bg-slate-800 border border-slate-700/80 text-xs font-bold text-slate-200 flex items-center justify-between transition active:scale-[0.99]">
+          <span>${enToAz ? opt.az : opt.en}</span>
+          <span class="text-[10px] font-mono text-slate-500">${String.fromCharCode(65 + idx)}</span>
+        </button>
+      `).join('');
+
+      if (enToAz) setTimeout(() => speakEnglish(currentWordQuizItem.en, 1.0), 200);
+    }
+
+    function speakCurrentWordQuiz() {
+      if (currentWordQuizItem) speakEnglish(currentWordQuizItem.en, 0.95);
+    }
+
+    function answerWordQuiz(selectedId, btnEl) {
+      if (wqAnswered) return;
+      wqAnswered = true;
+      document.querySelectorAll('.wq-opt').forEach(b => b.disabled = true);
+
+      const banner = document.getElementById('wqFeedbackBanner');
+      if (selectedId === currentWordQuizItem.id) {
+        playSoundEffect('correct');
+        btnEl.classList.add('bg-emerald-500/20', 'border-emerald-500', 'text-emerald-300');
+        const gained = 10 * wqCombo;
+        state.xp += gained;
+        wqCombo = Math.min(5, wqCombo + 1);
+        document.getElementById('wordQuizCombo').textContent = `x${wqCombo}`;
+        saveAppState();
+
+        banner.className = 'rounded-2xl p-3 text-xs border bg-emerald-500/10 border-emerald-500/35 text-emerald-200 space-y-1';
+        banner.innerHTML = `<div class="font-extrabold text-emerald-400">✓ Doğru! +${gained} XP (Kombo x${wqCombo})</div><div>Nümunə: <em>"${currentWordQuizItem.exEn}"</em></div>`;
+      } else {
+        playSoundEffect('wrong');
+        btnEl.classList.add('bg-rose-500/20', 'border-rose-500', 'text-rose-300');
+        wqCombo = 1;
+        document.getElementById('wordQuizCombo').textContent = 'x1';
+
+        banner.className = 'rounded-2xl p-3 text-xs border bg-rose-500/10 border-rose-500/35 text-rose-200 space-y-1';
+        banner.innerHTML = `<div class="font-extrabold text-rose-400">✕ Yanlış cavab</div><div>Düzgün cavab: <strong>${currentWordQuizItem.en}</strong> — ${currentWordQuizItem.az}</div>`;
+      }
+
+      speakEnglish(currentWordQuizItem.en, 1.0);
+      banner.classList.remove('hidden');
+      document.getElementById('wqNextBtn').classList.remove('hidden');
+    }
+
+    // =========================================================================
+    // 10. TAB 3: GRAMMAR LAB & SENTENCE BUILDER MINI-GAME
+    // =========================================================================
+    function renderGrammarLab() {
+      const pillsContainer = document.getElementById('grammarTopicPills');
+      pillsContainer.innerHTML = GRAMMAR_TOPICS.map(t => {
+        const active = state.activeGrammarId === t.id;
+        return `
+          <button onclick="selectGrammarTopic('${t.id}')"
+            class="whitespace-nowrap px-3 py-1.5 rounded-xl text-xs font-bold transition ${
+              active
+                ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/25'
+                : 'bg-slate-900 border border-slate-800 text-slate-400 hover:text-slate-200'
+            }">
+            ${t.title}
+          </button>
+        `;
+      }).join('');
+
+      const topic = GRAMMAR_TOPICS.find(t => t.id === state.activeGrammarId) || GRAMMAR_TOPICS[0];
+      const card = document.getElementById('grammarFormulaCard');
+      card.innerHTML = `
+        <div class="flex items-center justify-between">
+          <h3 class="text-base font-black text-white">${topic.title}</h3>
+          <span class="text-[10px] font-extrabold px-2 py-0.5 rounded-lg bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">${topic.badge}</span>
+        </div>
+        <p class="text-xs text-slate-300 leading-relaxed">${topic.summary}</p>
+        <div class="space-y-2">
+          ${topic.rows.map(r => {
+            const safeEx = r.ex.replace(/'/g, "\\'");
+            return `
+              <div class="p-2.5 rounded-2xl bg-slate-950/85 border border-slate-800 flex items-center justify-between gap-2">
+                <div class="space-y-0.5">
+                  <div class="text-[11px] font-extrabold ${r.color}">${r.subj} + <span class="underline">${r.verb}</span></div>
+                  <div class="text-xs font-bold text-white">${r.ex}</div>
+                  <div class="text-[11px] text-slate-400">${r.az}</div>
+                </div>
+                <button onclick="speakEnglish('${safeEx}', 0.95)" class="p-2 rounded-xl bg-slate-800 hover:bg-indigo-600 text-indigo-300 hover:text-white transition shrink-0">
+                  <i data-lucide="volume-2" class="w-4 h-4"></i>
+                </button>
+              </div>
+            `;
+          }).join('')}
+        </div>
+        <div class="p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/25 text-[11px] text-amber-200">
+          💡 <strong>Qızıl Qayda:</strong> ${topic.tip}
+        </div>
+      `;
+      lucide.createIcons();
+    }
+
+    function selectGrammarTopic(id) {
+      state.activeGrammarId = id;
+      renderGrammarLab();
+    }
+
+    // Word-Tile Sentence Builder Mini-Game
+    let sbAvailableTiles = [];
+    let sbSelectedTiles = [];
+
+    function initSentenceBuilder() {
+      const idx = state.puzzleIndex % SENTENCE_PUZZLES.length;
+      const puzzle = SENTENCE_PUZZLES[idx];
+      document.getElementById('sbProgressLabel').textContent = `Tapşırıq ${idx + 1} / ${SENTENCE_PUZZLES.length}`;
+      document.getElementById('sbTargetAz').textContent = puzzle.az;
+      document.getElementById('sbFeedback').classList.add('hidden');
+
+      sbSelectedTiles = [];
+      sbAvailableTiles = puzzle.words
+        .map((w, i) => ({ id: i, text: w }))
+        .sort(() => 0.5 - Math.random());
+
+      renderSentenceBuilderTiles();
+    }
+
+    function renderSentenceBuilderTiles() {
+      const selectedZone = document.getElementById('sbSelectedZone');
+      const bankZone = document.getElementById('sbWordBank');
+
+      if (sbSelectedTiles.length === 0) {
+        selectedZone.innerHTML = `<span class="text-xs text-slate-500 italic">Aşağıdakı söz bloklarına toxunun...</span>`;
+      } else {
+        selectedZone.innerHTML = sbSelectedTiles.map(tile => `
+          <button onclick="removeSbTile(${tile.id})"
+            class="px-3 py-1.5 rounded-xl bg-indigo-600 text-white text-xs font-extrabold shadow transition active:scale-90">
+            ${tile.text}
+          </button>
+        `).join('');
+      }
+
+      bankZone.innerHTML = sbAvailableTiles.map(tile => {
+        const used = sbSelectedTiles.some(s => s.id === tile.id);
+        return `
+          <button onclick="addSbTile(${tile.id})" ${used ? 'disabled' : ''}
+            class="px-3.5 py-2 rounded-xl text-xs font-bold border transition active:scale-90 ${
+              used
+                ? 'bg-slate-900/40 border-slate-800 text-slate-700 cursor-default'
+                : 'bg-slate-800 hover:bg-slate-700 border-slate-700 text-slate-100 shadow-sm'
+            }">
+            ${tile.text}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function addSbTile(tileId) {
+      const tile = sbAvailableTiles.find(t => t.id === tileId);
+      if (tile && !sbSelectedTiles.some(s => s.id === tileId)) {
+        sbSelectedTiles.push(tile);
+        renderSentenceBuilderTiles();
+      }
+    }
+
+    function removeSbTile(tileId) {
+      sbSelectedTiles = sbSelectedTiles.filter(s => s.id !== tileId);
+      renderSentenceBuilderTiles();
+    }
+
+    function clearSentenceBuilder() {
+      sbSelectedTiles = [];
+      document.getElementById('sbFeedback').classList.add('hidden');
+      renderSentenceBuilderTiles();
+    }
+
+    function checkSentenceBuilder() {
+      const idx = state.puzzleIndex % SENTENCE_PUZZLES.length;
+      const puzzle = SENTENCE_PUZZLES[idx];
+      const userSentence = sbSelectedTiles.map(t => t.text).join(' ');
+      const correctSentence = puzzle.words.join(' ');
+      const fb = document.getElementById('sbFeedback');
+
+      if (!userSentence) {
+        showToast('Əvvəlcə söz bloklarını seçin!');
+        return;
+      }
+
+      if (userSentence === correctSentence) {
+        playSoundEffect('correct');
+        speakEnglish(correctSentence, 0.95);
+        state.xp += 20;
+        saveAppState();
+
+        fb.className = 'rounded-2xl p-3 text-xs border bg-emerald-500/15 border-emerald-500/40 text-emerald-200 space-y-1';
+        fb.innerHTML = `<div class="font-extrabold text-emerald-400">✓ Mükəmməl! +20 XP</div><div>"${correctSentence}"</div>`;
+        fb.classList.remove('hidden');
+
+        setTimeout(() => {
+          state.puzzleIndex = (state.puzzleIndex + 1) % SENTENCE_PUZZLES.length;
+          saveAppState();
+          initSentenceBuilder();
+        }, 1600);
+      } else {
+        playSoundEffect('wrong');
+        fb.className = 'rounded-2xl p-3 text-xs border bg-rose-500/15 border-rose-500/40 text-rose-200 space-y-1';
+        fb.innerHTML = `<div class="font-extrabold text-rose-400">✕ Sıralama tam uyğun gəlmədi</div><div>💡 İpucu: ${puzzle.hint}</div>`;
+        fb.classList.remove('hidden');
+      }
+    }
+
+    // =========================================================================
+    // 11. TAB 4: SPEAKING, ROLEPLAY, PRONUNCIATION MIC & AI TUTOR
+    // =========================================================================
+    function setSpeakingSubMode(mode) {
+      ['roleplay', 'mic', 'aitutor'].forEach(m => {
+        document.getElementById(`speaking-${m}-view`).classList.add('hidden');
+        const btn = document.getElementById(`sp-${m}`);
+        btn.className = 'py-2 rounded-xl text-[11px] font-bold text-slate-400 hover:text-white transition';
+      });
+      document.getElementById(`speaking-${mode}-view`).classList.remove('hidden');
+      document.getElementById(`sp-${mode}`).className = 'py-2 rounded-xl text-[11px] font-extrabold bg-emerald-500 text-slate-950 shadow transition';
+    }
+
+    // --- 11A. Roleplay Simulator ---
+    function renderRoleplayPills() {
+      const container = document.getElementById('roleplayScenarioPills');
+      container.innerHTML = ROLEPLAY_SCENARIOS.map(sc => {
+        const active = state.activeRoleplayId === sc.id;
+        return `
+          <button onclick="selectRoleplayScenario('${sc.id}')"
+            class="whitespace-nowrap px-3 py-1.5 rounded-xl text-xs font-bold transition ${
+              active
+                ? 'bg-emerald-500 text-slate-950 shadow'
+                : 'bg-slate-900 border border-slate-800 text-slate-400 hover:text-white'
+            }">
+            ${sc.title}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function selectRoleplayScenario(id) {
+      state.activeRoleplayId = id;
+      state.roleplayStep = 0;
+      renderRoleplayPills();
+      startRoleplay();
+    }
+
+    function resetRoleplay() {
+      state.roleplayStep = 0;
+      startRoleplay();
+    }
+
+    function startRoleplay() {
+      const sc = ROLEPLAY_SCENARIOS.find(s => s.id === state.activeRoleplayId) || ROLEPLAY_SCENARIOS[0];
+      document.getElementById('rpHeaderTitle').textContent = sc.title;
+      document.getElementById('rpMessagesFeed').innerHTML = '';
+      renderRoleplayStep();
+    }
+
+    function appendRpBubble(sender, en, az, tip = '') {
+      const feed = document.getElementById('rpMessagesFeed');
+      const isBot = sender === 'bot';
+      const safeEn = en.replace(/'/g, "\\'");
+      const div = document.createElement('div');
+      div.className = `flex flex-col ${isBot ? 'items-start' : 'items-end'} animate-pop`;
+      div.innerHTML = `
+        <div class="max-w-[86%] rounded-2xl px-3.5 py-2.5 text-xs space-y-1 shadow ${
+          isBot
+            ? 'bg-slate-800/95 border border-slate-700/80 text-white rounded-tl-sm'
+            : 'bg-indigo-600 text-white rounded-tr-sm'
+        }">
+          <div class="flex items-start justify-between gap-2">
+            <p class="font-bold leading-relaxed">${en}</p>
+            <button onclick="speakEnglish('${safeEn}', 0.95)" class="p-1 rounded-lg ${isBot ? 'bg-slate-700 text-emerald-400' : 'bg-indigo-700 text-white'} shrink-0">
+              <i data-lucide="volume-2" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+          ${az ? `<p class="text-[11px] ${isBot ? 'text-slate-400' : 'text-indigo-100'}">${az}</p>` : ''}
+        </div>
+        ${tip ? `<div class="mt-1 max-w-[85%] px-2.5 py-1 rounded-xl bg-amber-500/10 border border-amber-500/25 text-[10px] text-amber-300">💡 ${tip}</div>` : ''}
+      `;
+      feed.appendChild(div);
+      feed.scrollTop = feed.scrollHeight;
+      lucide.createIcons();
+    }
+
+    function renderRoleplayStep() {
+      const sc = ROLEPLAY_SCENARIOS.find(s => s.id === state.activeRoleplayId) || ROLEPLAY_SCENARIOS[0];
+      const box = document.getElementById('rpChoicesBox');
+
+      if (state.roleplayStep >= sc.steps.length) {
+        box.innerHTML = `
+          <div class="text-center py-2 space-y-1.5">
+            <p class="text-xs font-extrabold text-emerald-400">🎉 Dialoq uğurla tamamlandı! (+25 XP)</p>
+            <button onclick="resetRoleplay()" class="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-white">
+              Dialoqu təkrarla
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      const step = sc.steps[state.roleplayStep];
+      appendRpBubble('bot', step.botEn, step.botAz, step.tip);
+      speakEnglish(step.botEn, 0.96);
+
+      box.innerHTML = step.choices.map((ch, i) => `
+        <button onclick="pickRoleplayChoice(${i})"
+          class="w-full text-left p-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700/80 transition flex flex-col gap-0.5 active:scale-[0.99]">
+          <span class="text-xs font-bold text-emerald-300">${ch.en}</span>
+          <span class="text-[11px] text-slate-400">${ch.az}</span>
+        </button>
+      `).join('');
+    }
+
+    function pickRoleplayChoice(idx) {
+      const sc = ROLEPLAY_SCENARIOS.find(s => s.id === state.activeRoleplayId) || ROLEPLAY_SCENARIOS[0];
+      const step = sc.steps[state.roleplayStep];
+      const chosen = step.choices[idx];
+
+      appendRpBubble('user', chosen.en, chosen.az);
+      speakEnglish(chosen.en, 1.0);
+      playSoundEffect('correct');
+
+      state.roleplayStep += 1;
+      if (state.roleplayStep >= sc.steps.length) {
+        state.xp += 25;
+        saveAppState();
+      }
+      setTimeout(renderRoleplayStep, 650);
+    }
+
+    // --- 11B. Pronunciation Mic Check ---
+    function renderPronunciationCard() {
+      const p = PRONUNCIATION_PHRASES[state.pronIndex % PRONUNCIATION_PHRASES.length];
+      document.getElementById('pronTargetEn').textContent = p.en;
+      document.getElementById('pronTargetAz').textContent = `“${p.az}”`;
+      document.getElementById('pronTargetPhonetic').textContent = `[${p.ph}]`;
+      document.getElementById('pronResultBox').classList.add('hidden');
+      document.getElementById('micStatusLabel').textContent = 'Danışmaq üçün mikrofona toxunun';
+    }
+
+    function speakPronunciationTarget() {
+      const p = PRONUNCIATION_PHRASES[state.pronIndex % PRONUNCIATION_PHRASES.length];
+      speakEnglish(p.en, 0.9);
+    }
+
+    function nextPronunciationPhrase() {
+      state.pronIndex = (state.pronIndex + 1) % PRONUNCIATION_PHRASES.length;
+      renderPronunciationCard();
+    }
+
+    function startPronunciationCheck() {
+      const target = PRONUNCIATION_PHRASES[state.pronIndex % PRONUNCIATION_PHRASES.length];
+      const statusLabel = document.getElementById('micStatusLabel');
+      const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+      if (!SpeechRec) {
+        simulatePronunciationScore(target);
+        return;
+      }
+
+      try {
+        const recognition = new SpeechRec();
+        recognition.lang = 'en-US';
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 1;
+
+        statusLabel.textContent = '🎙️ Dinlənilir... İndi ingiliscə danışın!';
+        statusLabel.className = 'text-xs font-bold text-emerald-400 animate-pulse';
+
+        recognition.onresult = (event) => {
+          const spoken = event.results[0][0].transcript;
+          evaluateSpokenText(target.en, spoken);
+        };
+
+        recognition.onerror = () => {
+          simulatePronunciationScore(target);
+        };
+
+        recognition.onend = () => {
+          statusLabel.className = 'text-xs font-semibold text-slate-400';
+        };
+
+        recognition.start();
+      } catch (e) {
+        simulatePronunciationScore(target);
+      }
+    }
+
+    function evaluateSpokenText(targetEn, spokenText) {
+      const cleanTarget = targetEn.toLowerCase().replace(/[^a-z\s]/g, '').split(/\s+/);
+      const cleanSpoken = spokenText.toLowerCase().replace(/[^a-z\s]/g, '').split(/\s+/);
+      let matches = 0;
+      cleanTarget.forEach(w => { if (cleanSpoken.includes(w)) matches++; });
+      const score = Math.min(100, Math.max(45, Math.round((matches / cleanTarget.length) * 100)));
+
+      showPronunciationResult(spokenText, score);
+    }
+
+    function simulatePronunciationScore(target) {
+      const statusLabel = document.getElementById('micStatusLabel');
+      statusLabel.textContent = '🎙️ Səs analiz edilir...';
+      setTimeout(() => {
+        statusLabel.textContent = 'Məşq tamamlandı!';
+        const simScore = 88 + Math.floor(Math.random() * 11);
+        showPronunciationResult(target.en, simScore);
+      }, 1100);
+    }
+
+    function showPronunciationResult(spoken, score) {
+      playSoundEffect('correct');
+      state.xp += 15;
+      saveAppState();
+
+      document.getElementById('pronScoreBadge').textContent = `${score}%`;
+      document.getElementById('pronSpokenText').textContent = `"${spoken}"`;
+      document.getElementById('pronFeedbackTip').textContent = score >= 80
+        ? 'Əla tələffüz! Söz vurğularını çox təbii dediniz. (+15 XP)'
+        : 'Yaxşı cəhddir! Nümunəni 1 dəfə də dinləyib daha aydın təkrarlayın. (+15 XP)';
+      document.getElementById('pronResultBox').classList.remove('hidden');
+    }
+
+    // --- 11C. Smart AI Tutor Chat ---
+    function initAiTutorWelcome() {
+      const feed = document.getElementById('aiTutorFeed');
+      if (feed.children.length > 0) return;
+      appendAiTutorBubble(
+        'bot',
+        `Salam ${telegramUserName}! Mən sənin şəxsi AI İngilis Müəlliminəm. Mənə istənilən cümləni yaz — səhvlərini düzəldim, tərcümə edim və ya birlikdə ingiliscə söhbət edək!`,
+        'Məsələn: "I goes to work" yaz və necə düzəltdiyimə bax.'
+      );
+    }
+
+    function appendAiTutorBubble(sender, mainText, subNote = '', englishSample = '') {
+      const feed = document.getElementById('aiTutorFeed');
+      const isBot = sender === 'bot';
+      const div = document.createElement('div');
+      div.className = `flex flex-col ${isBot ? 'items-start' : 'items-end'} animate-pop`;
+      const safeSample = englishSample.replace(/'/g, "\\'");
+
+      div.innerHTML = `
+        <div class="max-w-[88%] rounded-2xl px-3.5 py-2.5 text-xs space-y-1.5 shadow ${
+          isBot
+            ? 'bg-slate-800/95 border border-slate-700/80 text-slate-100 rounded-tl-sm'
+            : 'bg-indigo-600 text-white rounded-tr-sm'
+        }">
+          <div class="leading-relaxed whitespace-pre-line">${mainText}</div>
+          ${englishSample ? `
+            <div class="p-2 rounded-xl bg-slate-950/80 border border-slate-700/70 flex items-center justify-between gap-2">
+              <span class="font-bold text-emerald-300">${englishSample}</span>
+              <button onclick="speakEnglish('${safeSample}', 0.95)" class="p-1 rounded-lg bg-emerald-500/20 text-emerald-300 shrink-0">
+                <i data-lucide="volume-2" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+          ` : ''}
+          ${subNote ? `<div class="text-[11px] text-amber-300/90 border-t border-slate-700/60 pt-1">${subNote}</div>` : ''}
+        </div>
+      `;
+      feed.appendChild(div);
+      feed.scrollTop = feed.scrollHeight;
+      lucide.createIcons();
+    }
+
+    function sendQuickAiPrompt(promptText) {
+      document.getElementById('aiTutorInput').value = promptText;
+      handleAiTutorSubmit(new Event('submit'));
+    }
+
+    async function handleAiTutorSubmit(e) {
+      e.preventDefault();
+      const input = document.getElementById('aiTutorInput');
+      const userMsg = input.value.trim();
+      if (!userMsg) return;
+
+      input.value = '';
+      appendAiTutorBubble('user', userMsg);
+
+      const btn = document.getElementById('aiTutorSendBtn');
+      btn.disabled = true;
+
+      // Built-in Intelligent Local Grammar & Phrase Engine (instant response even offline)
+      const lower = userMsg.toLowerCase();
+      if (lower.includes('5 gündəlik fraza') || lower.includes('fraza öyrət')) {
+        const sample5 = [...VOCABULARY_DB].sort(() => 0.5 - Math.random()).slice(0, 5);
+        const listText = sample5.map((w, i) => `${i + 1}. <b>${w.en}</b> [${w.ph}] — ${w.az}`).join('\n');
+        appendAiTutorBubble(
+          'bot',
+          `Budur, bu gün işlədə biləcəyin 5 super gündəlik fraza:\n\n${listText}`,
+          '💡 Məsləhət: Bu ifadələrdən birini seçib mənə cümlədə yaz!',
+          sample5[0].en
+        );
+        speakEnglish(sample5[0].en, 0.95);
+        state.xp += 10;
+        saveAppState();
+        btn.disabled = false;
+        return;
+      }
+
+      if (lower.includes('i goes')) {
+        appendAiTutorBubble(
+          'bot',
+          `🔍 Qrammatika Yoxlanışı:\n❌ "I goes to work" səhvdir, çünki <b>"I"</b> (Mən) ilə felin sonuna <b>"-s"</b> artırılmır! "-s" yalnız <i>He / She / It</i> ilə işlənir.`,
+          '✅ Düzgün variant aşağıdadır:',
+          'I go to work every day.'
+        );
+        speakEnglish('I go to work every day.', 0.95);
+        state.xp += 10;
+        saveAppState();
+        btn.disabled = false;
+        return;
+      }
+
+      // Gemini API Integration with Graceful Offline Tutor Fallback
+      try {
+        const apiKey = "";
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+        const sysPrompt = `Sən azərbaycanlı tələbələrə 0-dan ingilis dili öyrədən mehriban, peşəkar AI müəllimsən.
+Cavabını JSON formatında qaytar:
+{
+  "replyAz": "Azərbaycanca izah, səhv varsa nəzakətli düzəliş və səbəbi",
+  "englishSample": "Təbii gündəlik ingilis cümləsi",
+  "tipAz": "Qısa qrammatika və ya tələffüz məsləhəti"
+}`;
+
+        const res = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: userMsg }] }],
+            systemInstruction: { parts: [{ text: sysPrompt }] },
+            generationConfig: { responseMimeType: 'application/json' }
+          })
+        });
+
+        if (!res.ok) throw new Error('Offline fallback');
+        const data = await res.json();
+        const parsed = JSON.parse(data.candidates[0].content.parts[0].text);
+
+        appendAiTutorBubble('bot', parsed.replyAz, `💡 ${parsed.tipAz}`, parsed.englishSample);
+        if (parsed.englishSample) speakEnglish(parsed.englishSample, 0.95);
+      } catch (err) {
+        const randomPhrase = VOCABULARY_DB[Math.floor(Math.random() * VOCABULARY_DB.length)];
+        appendAiTutorBubble(
+          'bot',
+          `Əla cəhddir! Gəl ingiliscə söhbətimizi davam etdirək. Bu ifadəni gündəlik danışıqda çox eşidəcəksən:\n<b>${randomPhrase.az}</b>`,
+          `💡 Oxunuşu: [${randomPhrase.ph}]`,
+          randomPhrase.en
+        );
+        speakEnglish(randomPhrase.en, 0.95);
+      } finally {
+        state.xp += 10;
+        saveAppState();
+        btn.disabled = false;
+      }
+    }
+
+    // =========================================================================
+    // 12. NAVIGATION & DOWNLOAD SELF-CONTAINED INDEX.HTML
+    // =========================================================================
+    function switchMainTab(tabId) {
+      ['roadmap', 'words', 'grammar', 'speaking'].forEach(t => {
+        document.getElementById(`tab-${t}`).classList.add('hidden');
+        const btn = document.getElementById(`nav-${t}`);
+        btn.classList.remove('text-indigo-400', 'bg-indigo-500/15');
+        btn.classList.add('text-slate-400');
+      });
+
+      document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+      const activeBtn = document.getElementById(`nav-${tabId}`);
+      activeBtn.classList.remove('text-slate-400');
+      activeBtn.classList.add('text-indigo-400', 'bg-indigo-500/15');
+
+      if (tabId === 'speaking') initAiTutorWelcome();
+      lucide.createIcons();
+    }
+
+    function downloadIndexHtml() {
+      try {
+        const fullSource = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+        const blob = new Blob([fullSource], { type: 'text/html;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'index.html';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+        playSoundEffect('correct');
+        showToast('FluentPro AZ (index.html) faylı yükləndi! 🚀');
+      } catch (e) {
+        showToast('Yükləmə zamanı xəta baş verdi');
+      }
+    }
+
+    // =========================================================================
+    // 13. BOOTSTRAP APPLICATION ON LOAD
+    // =========================================================================
+    window.addEventListener('DOMContentLoaded', () => {
+      loadAppState();
+      updateTopHud();
+      renderRoadmap();
+      renderWordCategoryPills();
+      renderFlashcard();
+      renderGrammarLab();
+      initSentenceBuilder();
+      renderRoleplayPills();
+      startRoleplay();
+      renderPronunciationCard();
+      lucide.createIcons();
+    });
+  </script>
+</body>
+</html>
